@@ -1,0 +1,18 @@
+@use 'styles/themes/theme' as *;
+@use 'styles/abstracts/variables' as *;
+
+.languagedropdown-container {
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  overflow: visible;
+
+}
+
+.languagedropdown-options {
+  padding: $space-2 $space-1;
+  position: absolute;
+  top: 100%;
+  right: -10%;
+}

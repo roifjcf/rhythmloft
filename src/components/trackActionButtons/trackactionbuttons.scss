@@ -1,0 +1,8 @@
+@use 'styles/themes/theme' as *;
+@use 'styles/abstracts/variables' as *;
+
+.trackactionbuttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}

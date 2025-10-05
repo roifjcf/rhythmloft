@@ -1,0 +1,80 @@
+@use 'styles/themes/theme' as *;
+@use 'styles/abstracts/variables' as *;
+
+.playlist-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  margin-right: $space-2;
+
+  @media (max-width: $breakpoint-md) {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.playlist-list {
+  width: 0%;
+  height: 100%;
+  transition: width 1s ease-in-out;
+  color: $white;
+  z-index: $z-index-overlay;
+
+}
+
+.playlist-track {
+  transition: background-color 0.3s ease;
+  
+}
+
+.playlist-current {
+  background-color: $white-transparent;
+}
+
+
+
+.playlist-closebutton {
+  margin-top: $space-1;
+  margin-left: $space-2;
+  @media (min-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+.playlist-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: $space-2;
+  padding: $space-1 $space-2;
+  margin: $space-2 0;
+}
+
+.playlist-buttons--selected {
+  background-color: $white-transparent;
+}
+
+.playlist-no-result {
+  padding: $space-1 $space-2;
+}
+
+.playlist-search {
+  padding: $space-1 $space-2;
+  width: 100%;
+}
+
+.playlist-track-container {
+  padding: $space-1 $space-2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    background-color: $white-transparent;
+  }
+}
+
+.playlist-ignored {
+  opacity: 0.5;
+}

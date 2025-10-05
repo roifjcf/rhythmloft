@@ -1,0 +1,74 @@
+@use 'styles/themes/theme' as *;
+@use 'styles/abstracts/variables' as *;
+
+.playcontrol-container {
+  padding: $space-4;
+  
+}
+
+
+
+
+
+.playcontrol-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.playcontrol-info-container--title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: $space-2;
+
+  h2 {
+    height: auto;
+    text-align: center;
+    color: $white;
+  }
+}
+
+
+
+
+.playcontrol-info-container--author {
+  opacity: 0.5;
+  word-break: break-all;
+}
+
+
+
+
+
+.playcontrol-buttons {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin-top: $space-2;
+
+
+
+  .left {
+    display: flex;
+    flex-direction: row;
+  }
+  .right {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    position: absolute;
+    right: 0;
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    justify-content: space-between;
+  }
+
+}

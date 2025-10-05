@@ -1,0 +1,31 @@
+@use 'styles/themes/theme' as *;
+@use 'styles/abstracts/variables' as *;
+
+.modal-container {
+  width: 45%;
+  min-width: 300px;
+  height: 70%;
+  min-height: 450px;
+
+  position: fixed;
+  top: 50%; right: 50%;
+  transform: translate(50%,-50%);
+
+  z-index: $z-index-modal;
+
+  // animation
+  opacity: 0;
+  transform: translate(50%, -50%) scale(0.8);
+  animation: modalOpen 0.2s forwards ease-out;
+}
+
+@keyframes modalOpen {
+  from {
+    opacity: 0;
+    transform: translate(50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(50%, -50%) scale(1);
+  }
+}

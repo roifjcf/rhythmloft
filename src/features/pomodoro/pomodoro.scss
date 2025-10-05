@@ -1,0 +1,19 @@
+@use 'styles/themes/theme' as *;
+@use 'styles/abstracts/variables' as *;
+
+.pomodoro-container {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pomodoro-timer {
+  font-size: 2rem;
+}
+
+.pomodoro-controls {
+  display: flex;
+  flex-direction: row;
+}

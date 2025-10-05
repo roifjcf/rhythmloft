@@ -1,0 +1,26 @@
+@mixin aberration($size: 0.2rem, $opacity: 0.6) {
+  --aberration-offset: #{$size};
+  --aberration-opacity: #{$opacity};
+
+  text-shadow: 
+    calc(var(--aberration-offset)) 0 rgba(255, 10, 92, var(--aberration-opacity)),
+    calc(-1 * var(--aberration-offset)) 0 rgba(22, 133, 245, var(--aberration-opacity));
+}
+
+@mixin aberration-border($size: 0.1rem, $opacity: 0.6) {
+  --aberration-offset: #{$size};
+  --aberration-opacity: #{$opacity};
+
+  box-shadow: 
+    calc(var(--aberration-offset)) 0 0 rgba(255, 10, 92, var(--aberration-opacity)),
+    calc(-1 * var(--aberration-offset)) 0 0 rgba(22, 133, 245, var(--aberration-opacity));
+}
+
+@mixin aberration-weak($size: 0.1rem, $opacity: 0.6) {
+  --aberration-offset: #{$size};
+  --aberration-opacity: #{$opacity};
+
+  text-shadow: 
+    calc(var(--aberration-offset)) 0 rgba(255, 10, 92, var(--aberration-opacity)),
+    calc(-1 * var(--aberration-offset)) 0 rgba(22, 133, 245, var(--aberration-opacity));
+}

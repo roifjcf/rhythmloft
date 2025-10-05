@@ -1,0 +1,21 @@
+@use 'styles/themes/theme' as *;
+@use 'styles/abstracts/variables' as *;
+
+.sfxunit-container {
+  $size: $size-4xl;
+  width: $size;
+  height: auto;
+  margin-bottom: 0.5rem;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $space-1;
+
+
+  .playing {
+    // color: $white;
+    opacity: 1;
+  }
+}
