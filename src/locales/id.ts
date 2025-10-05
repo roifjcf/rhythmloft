@@ -1,5 +1,11 @@
 export const id = {
   "about-title": "Tentang rhythmloft",
+  "about-content": [
+    "rhythmloft is a music player that plays chill lofi, developed by roifjcf.",
+    "Enjoy rhythmloft?",
+    "Buy me a coffee!",
+    "Source code"
+  ],
   "weather": {
     0: "Cerah",
     1: "Hampir cerah",

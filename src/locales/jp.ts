@@ -1,5 +1,11 @@
 export const jp = {
   "about-title": "rhythmloftについて",
+  "about-content": [
+    "rhythmloft is a music player that plays chill lofi, developed by roifjcf.",
+    "Enjoy rhythmloft?",
+    "Buy me a coffee!",
+    "Source code"
+  ],
   "weather": {
     0: "快晴",
     1: "ほぼ快晴",
