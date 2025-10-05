@@ -45,3 +45,7 @@ csvToTrackJson(
   path.join(process.cwd(), "data", "tracks-lofi.csv"),
   path.join(process.cwd(), "public/trackinfo", "tracks-lofi.json")
 );
+csvToTrackJson(
+  path.join(process.cwd(), "data", "tracks-synthwave.csv"),
+  path.join(process.cwd(), "public/trackinfo", "tracks-synthwave.json")
+);

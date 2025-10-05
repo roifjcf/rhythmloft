@@ -21,11 +21,12 @@ export default function Playlist({ playlistElement, handleShowPlayList }: Props)
     currentTrack,
     handlePlaylistSongClick,
     handlePlayLofi,
+    handlePlaySynthwave,
     toggleCustomTrack,
     toggleIgnoredTrack,
   } = usePlayer();
 
-  const [selectedPlaylist, setSelectedPlaylist] = useState<"remix" | "synthwave" | "custom">("remix");
+  const [selectedPlaylist, setSelectedPlaylist] = useState<"lofi" | "synthwave" | "custom">("lofi");
   const [searchTerm, setSearchTerm] = useState("");
   if (!tracks) return <div className="playlist-container">Loading playlist...</div>;
 
@@ -50,14 +51,14 @@ export default function Playlist({ playlistElement, handleShowPlayList }: Props)
 
         <div className="playlist-buttons">
           <button
-            className={selectedPlaylist === "remix" ? "playlist-buttons--selected" : ""}
-            onClick={() => handleSelectPlaylist("remix", handlePlayLofi)}
+            className={selectedPlaylist === "lofi" ? "playlist-buttons--selected" : ""}
+            onClick={() => handleSelectPlaylist("lofi", handlePlayLofi)}
           >
             Lofi
           </button>
           <button
             className={selectedPlaylist === "synthwave" ? "playlist-buttons--selected" : ""}
-            onClick={() => handleSelectPlaylist("synthwave")}
+            onClick={() => handleSelectPlaylist("synthwave", handlePlaySynthwave)}
           >
             Synthwave
           </button>

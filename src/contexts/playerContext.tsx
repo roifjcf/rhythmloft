@@ -25,6 +25,7 @@ type PlayerContextType = {
   setPlayMode: (mode: PlayMode) => void;
   setVolume: (v: number) => void;
   handlePlayLofi: () => void;
+  handlePlaySynthwave: () => void;
   toggleCustomTrack: (track: trackInterface) => void;
   toggleIgnoredTrack: (track: trackInterface) => void;
 };
@@ -49,6 +50,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     tracks,
     setTracks,
     tracksLofi,
+    tracksSynthwave,
   } = useTracks();
 
   const {
@@ -66,6 +68,12 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   const handlePlayLofi = () => {
     if (!tracksLofi) return;
     setTracks(tracksLofi);
+    setIsPlaying(true);
+  }
+
+  const handlePlaySynthwave = () => {
+    if (!tracksSynthwave) return;
+    setTracks(tracksSynthwave);
     setIsPlaying(true);
   }
 
@@ -88,6 +96,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
         setVolume,
         bgmRef,
         handlePlayLofi,
+        handlePlaySynthwave,
         toggleCustomTrack,
         toggleIgnoredTrack
       }}

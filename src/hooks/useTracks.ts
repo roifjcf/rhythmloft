@@ -4,6 +4,7 @@ import { trackInterface } from "@/common/type";
 export const useTracks = () => {
   const [tracks, setTracks] = useState<trackInterface[] | null>(null);
   const [tracksLofi, setTracksLofi] = useState<trackInterface[] | null>(null);
+  const [tracksSynthwave, setTracksSynthwave] = useState<trackInterface[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   // load tracks
@@ -15,12 +16,14 @@ export const useTracks = () => {
         const data = await res.json();
         setTracks(data["tracks-lofi"]);
         setTracksLofi(data["tracks-lofi"]);
+        setTracksSynthwave(data["tracks-synthwave"]);
         setError(null);
       } catch (err: any) {
         console.error("Failed to fetch tracks:", err);
         setError(err.message || "Unknown error");
         setTracks([]);
         setTracksLofi([]);
+        setTracksSynthwave([]);
       }
     };
     fetchTracks();
@@ -30,6 +33,7 @@ export const useTracks = () => {
     tracks,
     setTracks,
     tracksLofi,
+    tracksSynthwave,
     error
   };
 };

@@ -6,3 +6,8 @@ INPUT="../data/tracks-lofi.gnumeric"
 OUTPUT="../data/tracks-lofi.csv"
 
 ssconvert "$INPUT" "$OUTPUT"
+
+INPUT="../data/tracks-synthwave.gnumeric"
+OUTPUT="../data/tracks-synthwave.csv"
+
+ssconvert "$INPUT" "$OUTPUT"
