@@ -10,6 +10,7 @@ import { usePlayer } from "@/contexts/playerContext";
 import "./page.scss";
 import Navbar from "@/components/navbar/navbar";
 import Pomodoro from "@/features/pomodoro/pomodoro";
+import CharacterChat from "@/components/characterChat/characterChat";
 
 export default function Home() {
 
@@ -95,6 +96,7 @@ export default function Home() {
         </div>
 
         <div className="mid">
+          <CharacterChat />
           <Pomodoro />
           <PlayControl
             handleShowPlayList={handleShowPlayList}
