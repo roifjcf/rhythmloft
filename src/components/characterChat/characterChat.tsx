@@ -9,6 +9,32 @@ export default function CharacterChat() {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    const fetchWelcomeMessage = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch("/api/ollamaChat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: `As Rin, write a short and cozy greeting to the user as they open the chat.
+                      Encourage them gently for the rest of the day, keeping a lo-fi, relaxed vibe.`,
+          }),
+        });
+
+        const data = await res.json();
+        setMessages([{ role: "assistant", content: data.content || "(No welcome message)" }]);
+      } catch (err) {
+        console.error(err);
+        setMessages([{ role: "assistant", content: "(Failed to load welcome message)" }]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWelcomeMessage();
+  }, []);
+
   const sendMessage = async () => {
     if (!input.trim()) return;
 
