@@ -93,6 +93,7 @@ export default function CharacterChat() {
       e.preventDefault();
       sendMessage();
     }
+    e.stopPropagation(); // Prevent event from bubbling up
   };
 
   return (
