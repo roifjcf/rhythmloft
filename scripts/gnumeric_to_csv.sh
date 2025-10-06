@@ -11,3 +11,7 @@ INPUT="../data/tracks-synthwave.gnumeric"
 OUTPUT="../data/tracks-synthwave.csv"
 
 ssconvert "$INPUT" "$OUTPUT"
+
+
+cd ..
+npm run convert
