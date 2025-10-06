@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import AmbientSound from "@/features/ambientSound/ambientSound";
 import Playlist from "@/features/playlist/playlist";
 import PlayControl from "@/features/playControl/playControl";
 import Loading from "@/components/loading/loading";
@@ -104,11 +103,10 @@ export default function Home() {
         </div>
 
         <div className="right">
-          <AmbientSound sfxList={sfxList}/>
         </div>
         
         <Clock />
-        <Navbar />
+        <Navbar sfxList={sfxList} />
       </div>
       
 
