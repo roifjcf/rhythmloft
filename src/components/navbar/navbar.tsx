@@ -33,6 +33,7 @@ export default function Navbar() {
         <div className="navbar-settings-buttons">
           <button onClick={resetCustomTracks}>Reset loved tracks</button>
           <button onClick={resetIgnoredTracks}>Reset ignored tracks</button>
+          <button onClick={()=>{localStorage.removeItem("characterChatMessages");}}>Clear chat messages</button>
         </div>
         <hr />
         <h3>Preferences</h3>

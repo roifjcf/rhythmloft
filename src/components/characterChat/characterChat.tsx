@@ -233,6 +233,7 @@ export default function CharacterChat() {
                 : "user-message"
             }
           >
+            <div className="message-role">{m.role === "assistant" ? "Rin" : "You"}</div>
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}

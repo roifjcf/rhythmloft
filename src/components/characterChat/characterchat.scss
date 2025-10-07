@@ -74,3 +74,15 @@
 .rin-auto-message:hover {
   opacity: 1;
 }
+
+.message-role {
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: #555;
+}
+.rin-message .message-role {
+  color: $blue;
+}
+.user-message .message-role {
+  color: $white;
+}
