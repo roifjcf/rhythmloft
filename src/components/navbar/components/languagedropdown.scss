@@ -8,11 +8,21 @@
   position: relative;
   overflow: visible;
 
-}
+  ul {
+    position: absolute;
+    top: 120%;
+    right: -10%;
 
-.languagedropdown-options {
-  padding: $space-2 $space-1;
-  position: absolute;
-  top: 100%;
-  right: -10%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  li {
+    padding: $space-1 $space-1;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $white-transparent;
+    }
+  }
 }

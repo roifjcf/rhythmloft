@@ -6,12 +6,6 @@ import Icon from "@/components/icon/icon";
 import { useLanguage } from "@/contexts/languageContext";
 import "./languagedropdown.scss";
 
-interface LanguageDropdownProps {
-  currentLang: string;
-  onSelect: (lang: string) => void;
-  options?: string[];
-}
-
 export default function LanguageDropdown() {
   const { lang, setLang } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +31,7 @@ export default function LanguageDropdown() {
       />
 
       {isOpen && (
-        <ul className="container-bg languagedropdown-options">
+        <ul className="container-bg">
           {options.map((option) => (
             <li
               key={option}
