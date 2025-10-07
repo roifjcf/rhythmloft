@@ -9,7 +9,12 @@
   justify-content: space-between;
 }
 
+.characterchat-message-container {
+  overflow-y: auto;
+}
+
 .characterchat-input-container {
+  min-height: 32px;
   display: flex;
   gap: $space-2;
   margin-top: $space-4;

@@ -3,13 +3,24 @@
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import "./characterchat.scss";
 import TextInputWithSound from "../textInputWithSound";
+import { useLanguage } from "@/contexts/languageContext";
 
 export default function CharacterChat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const encouragementTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const { lang } = useLanguage();
 
+  const language = {
+    EN: "English",
+    JP: "Japanese",
+    ID: "Indonesian",
+    ZH_CN: "Chinese (Simplified)",
+    ZH_TW: "Chinese (Traditional)",
+  }[lang];
+  
   useEffect(() => {
     const fetchWelcomeMessage = async () => {
       setLoading(true);
@@ -18,8 +29,10 @@ export default function CharacterChat() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            message: `As Rin, write a short and cozy greeting to the user as they open the chat.
-                      Encourage them gently for the rest of the day, keeping a lo-fi, relaxed vibe.`,
+            message: `
+            As Rin, write a short and cozy greeting to the user in ${language}.
+            Encourage them gently for the rest of the day, keeping a lo-fi, relaxed vibe.
+          `,
           }),
         });
 
@@ -35,6 +48,60 @@ export default function CharacterChat() {
 
     fetchWelcomeMessage();
   }, []);
+
+    // Auto encouragement every 30-60 minutes
+  useEffect(() => {
+    const scheduleEncouragement = () => {
+      // const delay = 5000;
+      function getRandomMinutes(min: number, max: number): number {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      const minutes = getRandomMinutes(60, 90);
+      const delay = minutes * 60 * 1000;
+
+      const hour = new Date().getHours();
+      const timeOfDay = hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening";
+
+      const prompt = `
+      You are Rin, a friendly virtual assistant in a lo-fi cozy chat app.
+
+      Write a short, warm message to the user in ${language}.
+      - Remind them to take a little pause and breathe.
+      - Encourage them in a kind, personal way.
+      - Make them feel seen and appreciated.
+      - Optionally, tie it to the current time of day (${timeOfDay}) in a cozy way.
+      - Keep it casual and sweet, like a friend sending a thoughtful text. Keep it under 50 words.
+
+      Keep it short, natural, and comforting, as if Rin is sitting beside them.
+      `;
+
+      encouragementTimeoutRef.current = setTimeout(async () => {
+        try {
+          const res = await fetch("/api/ollamaChat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: prompt }),
+          });
+          const data = await res.json();
+          const content = data.content || "(No encouragement message)";
+
+          setMessages((prev) => [...prev, { role: "assistant", content }]);
+        } catch (err) {
+          console.error(err);
+        } finally {
+          scheduleEncouragement(); // Reschedule the next encouragement
+        }
+      }, delay);
+    };
+
+    scheduleEncouragement();
+
+    return () => {
+      if (encouragementTimeoutRef.current) {
+        clearTimeout(encouragementTimeoutRef.current);
+      }
+    };
+  }, [messages, language]);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -94,7 +161,7 @@ export default function CharacterChat() {
 
   return (
     <div className="container-bg characterchat-container">
-      <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+      <div className="characterchat-message-container">
         {messages.map((m, i) => (
           <div key={i}>
             <span>{m.content}</span>
