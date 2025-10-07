@@ -11,10 +11,7 @@ import { chatMessage } from "@/common/type";
 
 export default function CharacterChat() {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<chatMessage[]>(() => {
-    const stored = localStorage.getItem("characterChatMessages");
-    return stored ? JSON.parse(stored) : [];
-  });
+  const [messages, setMessages] = useState<chatMessage[] | null>(null);
   
 
   const [loading, setLoading] = useState(false);
@@ -31,21 +28,18 @@ export default function CharacterChat() {
   }[lang];
   
 
-  // initial load from localStorage
   useEffect(() => {
     const stored = localStorage.getItem("characterChatMessages");
-    if (stored) {
-      setMessages(JSON.parse(stored));
-    }
+    if (stored) setMessages(JSON.parse(stored));
+    else setMessages([]);
   }, []);
 
   // save to localStorage on messages change
   useEffect(() => {
-  const last20 = messages
-    .filter(m => !m.isAuto) // ignore auto messages
-    .slice(-20);
-  localStorage.setItem("characterChatMessages", JSON.stringify(last20));
-}, [messages]);
+    if (messages === null) return; // don't save until loaded
+    const last20 = messages.filter(m => !m.isAuto).slice(-20);
+    localStorage.setItem("characterChatMessages", JSON.stringify(last20));
+  }, [messages]);
 
   useEffect(() => {
     const fetchWelcomeMessage = async () => {
@@ -80,7 +74,7 @@ export default function CharacterChat() {
         });
 
         const data = await res.json();
-        setMessages(prev => [...prev, { role: "assistant", content: data.content || "(No welcome message)" }]);
+        setMessages(prev => [...(prev ?? []), { role: "assistant", content: data.content || "(No welcome message)" }]);
       } catch (err) {
         console.error(err);
         setMessages([{ role: "assistant", content: "(Failed to load welcome message)" }]);
@@ -94,7 +88,7 @@ export default function CharacterChat() {
 
   useEffect(() => {
     const scheduleEncouragement = () => {
-      const recentMessages = messages.slice(-20);
+      const recentMessages = (messages ?? []).slice(-20);
       const contextString = recentMessages.map(m => `${m.role}: ${m.content}`).join("\n");
       // const delay = 5000;
       function getRandomMinutes(min: number, max: number): number {
@@ -130,7 +124,7 @@ export default function CharacterChat() {
           const data = await res.json();
           const content = data.content || "(No encouragement message)";
 
-          setMessages((prev) => [...prev, { role: "assistant", content, isAuto: true }]);
+          setMessages((prev) => [...(prev ?? []), { role: "assistant", content, isAuto: true }]);
         } catch (err) {
           console.error(err);
         } finally {
@@ -151,7 +145,7 @@ export default function CharacterChat() {
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    const newMessages = [...messages, { role: "user", content: input }];
+    const newMessages = [...(messages ?? []), { role: "user", content: input }];
     setMessages([...newMessages, { role: "assistant", content: "" }]);
     setInput("");
     setLoading(true);
@@ -186,7 +180,7 @@ export default function CharacterChat() {
       const animate = () => {
         if (i <= content.length) {
           setMessages((prev) => {
-            const updated = [...prev];
+            const updated = [...(prev ?? [])];
             updated[updated.length - 1] = { role: "assistant", content: content.slice(0, i) };
             return updated;
           });
@@ -198,7 +192,7 @@ export default function CharacterChat() {
     } catch (err) {
       console.error(err);
       setMessages((prev) => {
-        const updated = [...prev];
+        const updated = [...(prev ?? [])];
         updated[updated.length - 1] = { role: "assistant", content: "(An error occurred)" };
         return updated;
       });
@@ -222,7 +216,7 @@ export default function CharacterChat() {
   return (
     <div className="container-bg characterchat-container">
       <div className="characterchat-message-container">
-        {messages.map((m, i) => (
+        {(messages ?? []).map((m, i) => (
           <div
             key={i}
             className={
