@@ -12,8 +12,6 @@
   top: 50%; right: 50%;
   transform: translate(50%,-50%);
 
-  z-index: $z-index-modal;
-
   // animation
   opacity: 0;
   transform: translate(50%, -50%) scale(0.8);

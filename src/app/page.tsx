@@ -27,9 +27,6 @@ export default function Home() {
 
   const handleShowPlayList = () => {
     setShowPlaylist(!showPlayList);
-    if (playlistElement.current) {
-      playlistElement.current.style.width = showPlayList ? "0%" : "100%";
-    }
   };
 
   useEffect(() => {
@@ -40,7 +37,6 @@ export default function Home() {
         !playlistElement.current.contains(event.target as Node)
       ) {
         setShowPlaylist(false);
-        playlistElement.current.style.width = "0%";
       }
     };
 
@@ -57,7 +53,6 @@ export default function Home() {
       }
       if (e.key === "Escape") {
         setShowPlaylist(false);
-        if (playlistElement.current) playlistElement.current.style.width = "0%";
       }
     };
     window.addEventListener("keydown", handlePlayByKey);
@@ -69,27 +64,34 @@ export default function Home() {
     <div className="page retro-screen">
       <h1 className="hidden-text">rhythmloft Lo-fi Music Player</h1>
 
+        
       <div className="content">
-        <div className="left">
-          <Playlist
-            playlistElement={playlistElement}
-            handleShowPlayList={handleShowPlayList}
-          />
-      {showPlayList && <div className="blur-overlay"></div>}
 
+        <div className="left">
+          <CharacterChat />
         </div>
 
-        <div className="mid">
-          <CharacterChat />
+        <div className="right">
+          <Clock />
           <Pomodoro />
           <PlayControl handleShowPlayList={handleShowPlayList} />
         </div>
 
-        <div className="right"></div>
-
-        <Clock />
-        <Navbar />
       </div>
+
+
+      <Navbar />
+
+
+      {showPlayList &&
+        <div className="page-playlist">
+          <Playlist
+            playlistElement={playlistElement}
+            handleShowPlayList={handleShowPlayList}
+          />
+          <div className="blur-overlay"></div>
+        </div>
+      }
 
       <audio
         ref={bgmRef}

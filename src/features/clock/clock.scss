@@ -2,9 +2,6 @@
 @use 'styles/abstracts/variables' as *;
 
 .clock-container {
-  position: absolute;
-  top: 15%; right: 50%;
-  transform: translate(50%,-50%);
   opacity: 0.8;
 
   display: flex;

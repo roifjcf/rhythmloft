@@ -181,6 +181,8 @@ button {
   background: grey; /* fallback */
   pointer-events: auto;
 
+  opacity: 0.5;
+
   &:hover {
     cursor: pointer;
   }
