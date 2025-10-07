@@ -1,5 +1,61 @@
 [
   {
+    "name": "90's Lofi City",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/90x27s-lofi-city-lofi-music-332737.mp3",
+    "source": "https://pixabay.com/music/beats-90x27s-lofi-city-lofi-music-332737/",
+    "authors": [
+      "lofidreams"
+    ]
+  },
+  {
+    "name": "Bathroom",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/bathroom-chill-background-music-14977.mp3",
+    "source": "https://pixabay.com/music/ambient-bathroom-chill-background-music-14977/",
+    "authors": [
+      "chill_background"
+    ]
+  },
+  {
+    "name": "Coverless book",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/coverless-book-lofi-186307.mp3",
+    "source": "https://pixabay.com/music/beats-coverless-book-lofi-186307/",
+    "authors": [
+      "AmbientAUDIOVISION"
+    ]
+  },
+  {
+    "name": "Cutie Japan",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/cutie-japan-lofi-402355.mp3",
+    "source": "https://pixabay.com/music/beats-cutie-japan-lofi-402355/",
+    "authors": [
+      "FASSounds"
+    ]
+  },
+  {
+    "name": "Dreaming Through Dusk",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/dreaming-through-dusk-lofi-beats-281206.mp3",
+    "source": "https://pixabay.com/music/beats-dreaming-through-dusk-lofi-beats-281206/",
+    "authors": [
+      "RibhavAgrawal"
+    ]
+  },
+  {
+    "name": "Empty mind",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/empty-mind-118973.mp3",
+    "source": "https://pixabay.com/music/beats-empty-mind-118973/",
+    "authors": [
+      "Lofi_hour"
+    ]
+  },
+  {
+    "name": "For a Dream",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/for-a-dream-lofi-vibes-216038.mp3",
+    "source": "https://pixabay.com/music/beats-for-a-dream-lofi-vibes-216038/",
+    "authors": [
+      "xethrocc"
+    ]
+  },
+  {
     "name": "Good Night",
     "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/good-night-lofi-cozy-chill-music-160166.mp3",
     "source": "https://pixabay.com/music/beats-good-night-lofi-cozy-chill-music-160166/",
@@ -8,9 +64,39 @@
     ]
   },
   {
+    "name": "Indigo",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/indigo-lo-fi-hip-hop-320827.mp3",
+    "source": "https://pixabay.com/music/beats-indigo-lo-fi-hip-hop-320827/",
+    "authors": [
+      "Grand_Project"
+    ]
+  },
+  {
+    "name": "Jinsei",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/lofi-song-jinsei-by-lofium-236730.mp3",
+    "source": "https://pixabay.com/music/beats-lofi-song-jinsei-by-lofium-236730/",
+    "authors": [
+      "Lofium"
+    ]
+  },
+  {
+    "name": "Lazy Sunday",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/lazy-sunday-chill-lofi-377239.mp3",
+    "source": "https://pixabay.com/music/beats-lazy-sunday-chill-lofi-377239/",
+    "authors": []
+  },
+  {
     "name": "Lofi Study",
     "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/lofi-study-calm-peaceful-chill-hop-112191.mp3",
     "source": "https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/",
+    "authors": [
+      "FASSounds"
+    ]
+  },
+  {
+    "name": "Minimalism",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/minimalism-chill-lofi-ambient-374830.mp3",
+    "source": "https://pixabay.com/music/beats-minimalism-chill-lofi-ambient-374830/",
     "authors": [
       "FASSounds"
     ]
@@ -32,26 +118,20 @@
     ]
   },
   {
-    "name": "Coverless book",
-    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/coverless-book-lofi-186307.mp3",
-    "source": "https://pixabay.com/music/beats-coverless-book-lofi-186307/",
+    "name": "Spirit Blossom",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/spirit-blossom-15285.mp3",
+    "source": "https://pixabay.com/music/beats-spirit-blossom-15285/",
     "authors": [
-      "AmbientAUDIOVISION"
+      "RomanBelov"
     ]
   },
   {
-    "name": "Whispering Vinyl",
-    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/whispering-vinyl-loops-lofi-beats-281193.mp3",
-    "source": "https://pixabay.com/music/beats-whispering-vinyl-loops-lofi-beats-281193/",
+    "name": "Stormy Night Coding",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/stormy-night-coding-chill-lofi-beats-381038.mp3",
+    "source": "https://pixabay.com/music/beats-stormy-night-coding-chill-lofi-beats-381038/",
     "authors": [
-      "RibhavAgrawal"
+      "lofidreams"
     ]
-  },
-  {
-    "name": "Lazy Sunday",
-    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/lazy-sunday-chill-lofi-377239.mp3",
-    "source": "https://pixabay.com/music/beats-lazy-sunday-chill-lofi-377239/",
-    "authors": []
   },
   {
     "name": "Tokyo Cafe",
@@ -62,11 +142,27 @@
     ]
   },
   {
-    "name": "Spirit Blossom",
-    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/spirit-blossom-15285.mp3",
-    "source": "https://pixabay.com/music/beats-spirit-blossom-15285/",
+    "name": "Toybox",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/lofi-song-toybox-by-lofium-242708.mp3",
+    "source": "https://pixabay.com/music/beats-lofi-song-toybox-by-lofium-242708/",
     "authors": [
-      "RomanBelov"
+      "Lofium"
+    ]
+  },
+  {
+    "name": "Velvet Sky",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/velvet-sky-lofi-ambient-231924.mp3",
+    "source": "https://pixabay.com/music/beats-velvet-sky-lofi-ambient-231924/",
+    "authors": [
+      "Top-Flow"
+    ]
+  },
+  {
+    "name": "Whispering Vinyl",
+    "url": "https://raw.githubusercontent.com/fcjfior/rhythmloft-cdn-i/main/lofi/whispering-vinyl-loops-lofi-beats-281193.mp3",
+    "source": "https://pixabay.com/music/beats-whispering-vinyl-loops-lofi-beats-281193/",
+    "authors": [
+      "RibhavAgrawal"
     ]
   }
 ]

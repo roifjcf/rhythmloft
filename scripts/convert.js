@@ -29,12 +29,14 @@ function csvToTrackJson(inputFile, outputFile) {
   const csv = fs.readFileSync(inputFile, "utf-8");
   const records = parse(csv, { columns: true, skip_empty_lines: true });
 
-  const json = records.map(track => ({
-    name: track.name,
-    url: track.url ? toRawUrl(track.url) : "",
-    source: track.source,
-    authors: parseauthorsField(track.authors),
-  }));
+  const json = records
+    .filter(track => track.url && track.url.trim() !== "") // filter out empty URLs
+    .map(track => ({
+      name: track.name,
+      url: toRawUrl(track.url),
+      source: track.source,
+      authors: parseauthorsField(track.authors),
+    }));
 
   fs.writeFileSync(outputFile, JSON.stringify(json, null, 2));
   console.log(`Generated ${outputFile} with ${json.length} tracks.`);
