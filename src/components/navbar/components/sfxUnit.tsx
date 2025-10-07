@@ -14,7 +14,7 @@ export default function sfxUnit({
 }: Props) {
   const sfx = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [volume, setVolume] = useState(0.25);
+  const [volume, setVolume] = useState(1);
 
   // const sfxShadow = useRef<HTMLAudioElement>(null); // to achieve seamless effect
   const [timeoutInfo, setTimeoutInfo] = useState<ReturnType<typeof setTimeout> | null>(null); // for sfxShadow
