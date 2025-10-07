@@ -12,7 +12,6 @@ import Pomodoro from "@/features/pomodoro/pomodoro";
 import CharacterChat from "@/components/characterChat/characterChat";
 
 export default function Home() {
-
   const {
     tracks,
     currentTrack,
@@ -21,61 +20,86 @@ export default function Home() {
     handlePause,
     handleNext,
     bgmRef,
-    } = usePlayer();
+  } = usePlayer();
 
   const [isLoading, setIsLoading] = useState(true);
   const [sfxList, setSfxList] = useState<string[] | null>(null);
+  const [sfxVolumes, setSfxVolumes] = useState<{ [key: string]: number }>({});
+  const sfxRefs = useRef<{ [key: string]: HTMLAudioElement }>({});
+  const [sfxPlaying, setSfxPlaying] = useState<{ [key: string]: boolean }>({});
   const [showPlayList, setShowPlaylist] = useState(false);
   const playlistElement = useRef<HTMLDivElement>(null);
-
 
   // fetch sfx
   useEffect(() => {
     const sfxInit = async () => {
-      console.log("loading sound effects...");
       const response = await fetch("api/sfxinit");
       const data = await response.json();
-      setSfxList(data.message.filter((fileName: string) => fileName !== "bell-notification-337658.mp3" && fileName !== "winner-bell-game-show-91932.mp3"));
-      console.log("loading sound effects done!");
+      const filtered = data.message.filter(
+        (fileName: string) =>
+          fileName !== "bell-notification-337658.mp3" &&
+          fileName !== "winner-bell-game-show-91932.mp3"
+      );
+      setSfxList(filtered);
+
+      filtered.forEach((name: string) => {
+        const audio = new Audio(`sfx/${name}`);
+        audio.preload = "none";
+        audio.volume = 1; // 初始單獨音量
+        audio.onended = () => {
+          audio.currentTime = 0; // reset to start
+        };
+        sfxRefs.current[name] = audio;
+      });
     };
     sfxInit();
 
-    // tracks were fetch by PlayerProvider
     setIsLoading(false);
   }, []);
 
   const handleShowPlayList = () => {
     setShowPlaylist(!showPlayList);
     if (playlistElement.current) {
-      if (!showPlayList) { playlistElement.current.style.width = "100%"; }
-      else { playlistElement.current.style.width = "0%"; }
+      playlistElement.current.style.width = showPlayList ? "0%" : "100%";
     }
-  }
+  };
 
   // keyboard control
   useEffect(() => {
     const handlePlayByKey = (e: KeyboardEvent) => {
       if (e.key === " " && bgmRef.current) {
-        if (isPlaying) {
-          handlePause();
-        } else {
-          handlePlay();
-        }
+        if (isPlaying) handlePause();
+        else handlePlay();
       }
       if (e.key === "Escape") {
         setShowPlaylist(false);
-        if (playlistElement.current) {
-          playlistElement.current.style.width = "0%";
-        }
+        if (playlistElement.current) playlistElement.current.style.width = "0%";
       }
     };
     window.addEventListener("keydown", handlePlayByKey);
-    return () => {
-      window.removeEventListener("keydown", handlePlayByKey);
-    };
+    return () => window.removeEventListener("keydown", handlePlayByKey);
   }, [isPlaying, handlePlay, handlePause]);
 
+  const toggleSfx = (name: string) => {
+    const audio = sfxRefs.current[name];
+    if (!audio) return;
 
+    if (!audio.paused) {
+      audio.pause();
+      audio.currentTime = 0;
+      setSfxPlaying(prev => ({ ...prev, [name]: false }));
+    } else {
+      audio.currentTime = 0;
+      audio.play();
+      setSfxPlaying(prev => ({ ...prev, [name]: true }));
+    }
+  };
+
+  const setSfxVolume = (name: string, volume: number) => {
+    setSfxVolumes((prev) => ({ ...prev, [name]: volume }));
+    const audio = sfxRefs.current[name];
+    if (audio) audio.volume = volume;
+  };
   
   
 
@@ -84,43 +108,44 @@ export default function Home() {
     {isLoading ? <Loading />:
     <>
     <div className="page retro-screen">
-      <h1 className="hidden-text">rhythmloft Lo-fi Music Player</h1>
+        <h1 className="hidden-text">rhythmloft Lo-fi Music Player</h1>
 
-      <div className="content">
-        <div className="left">
-          <Playlist
-            playlistElement={playlistElement}
-            handleShowPlayList={handleShowPlayList}
+        <div className="content">
+          <div className="left">
+            <Playlist
+              playlistElement={playlistElement}
+              handleShowPlayList={handleShowPlayList}
+            />
+          </div>
+
+          <div className="mid">
+            <CharacterChat />
+            <Pomodoro />
+            <PlayControl handleShowPlayList={handleShowPlayList} />
+          </div>
+
+          <div className="right"></div>
+
+          <Clock />
+          <Navbar
+            sfxList={sfxList}
+            toggleSfx={toggleSfx}
+            sfxVolumes={sfxVolumes}
+            setSfxVolume={setSfxVolume}
+            sfxPlaying={sfxPlaying}
           />
         </div>
 
-        <div className="mid">
-          <CharacterChat />
-          <Pomodoro />
-          <PlayControl
-            handleShowPlayList={handleShowPlayList}
-          />
-        </div>
-
-        <div className="right">
-        </div>
-        
-        <Clock />
-        <Navbar sfxList={sfxList} />
+        <audio
+          ref={bgmRef}
+          src={tracks && currentTrack !== null ? `${tracks[currentTrack].url}` : undefined}
+          autoPlay
+          preload="none"
+          onEnded={handleNext}
+        />
       </div>
-      
 
-      {/* other stuff */}
-      <audio
-        ref={bgmRef}
-        src={tracks && currentTrack !== null ? `${tracks[currentTrack].url}` : undefined}
-        autoPlay
-        preload="none"
-        onEnded={handleNext}
-      />
-    </div>
-
-    <div className="vaporwave-overlay"></div>
+      <div className="vaporwave-overlay"></div>
 
     {/* <div className="particles-overlay">
       {Array.from({ length: 50 }).map((_, i) => (

@@ -7,12 +7,14 @@ import { useLanguage } from "@/contexts/languageContext";
 import AmbientSound from "./components/ambientSound";
 
 interface Props {
-  sfxList: string[] | null,
+  sfxList: string[] | null;
+  toggleSfx: (name: string) => void;
+  sfxVolumes: { [key: string]: number };
+  setSfxVolume: (name: string, volume: number) => void;
+  sfxPlaying: { [key: string]: boolean };
 }
 
-export default function Navbar({
-  sfxList
-}: Props) {
+export default function Navbar({ sfxList, toggleSfx, sfxVolumes, setSfxVolume, sfxPlaying }: Props) {
   const { isOpen: isSfxMenuOpen, openModal: openWandModal, closeModal: closeSfxMenu } = useModal();
   const { isOpen: isHelpOpen, openModal: openHelpModal, closeModal: closeHelpModal } = useModal();
 
@@ -23,29 +25,25 @@ export default function Navbar({
   return (
     <div className="navbar-container">
       {/* Wand Icon */}
-      <Icon
-        src="img/icons/wand.png"
-        alt={"Ambient sound"}
-        size="sm"
-        onClick={openWandModal}
-      />
+      <Icon src="img/icons/wand.png" alt="Ambient sound" size="sm" onClick={openWandModal} />
 
       {/* Help Icon */}
-      <Icon
-        src="img/icons/help.png"
-        alt={"about"}
-        size="sm"
-        onClick={openHelpModal}
-      />
+      <Icon src="img/icons/help.png" alt="about" size="sm" onClick={openHelpModal} />
 
       <LanguageDropdown />
 
       {/* Wand Modal */}
       <Modal isOpen={isSfxMenuOpen} onClose={closeSfxMenu}>
         <div className="navbar-modal-close-btn" onClick={closeSfxMenu}>
-          <Icon src="img/icons/cancel.png" alt={"close"} size="sm" />
+          <Icon src="img/icons/cancel.png" alt="close" size="sm" />
         </div>
-        <AmbientSound sfxList={sfxList} />
+        <AmbientSound
+          sfxList={sfxList}
+          toggleSfx={toggleSfx}
+          sfxVolumes={sfxVolumes}
+          setSfxVolume={setSfxVolume}
+          sfxPlaying={sfxPlaying}
+        />
       </Modal>
 
       {/* Help Modal */}
