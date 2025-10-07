@@ -98,7 +98,6 @@ export default function Home() {
             ? tracks[currentTrack].url
             : undefined
         }
-        autoPlay
         preload="none"
         onEnded={handleNext}
       />
