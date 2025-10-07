@@ -7,10 +7,36 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  
+
 }
 
 .characterchat-message-container {
   overflow-y: auto;
+
+  ul, ol {
+    list-style: none; /* remove default bullets */
+    margin-left: 1.2em; /* optional for indentation */
+    padding-left: 0;
+  }
+
+  li {
+    position: relative;
+    padding-left: 1.2em; /* space for custom bullet */
+  }
+
+  li::before {
+    content: "•";
+    color: $white;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  th {
+    text-align: left;
+  }
 }
 
 .characterchat-input-container {
@@ -22,4 +48,29 @@
   button {
     min-width: 48px;
   }
+}
+
+
+.rin-auto-message {
+  opacity: 0.7;
+  background: rgba(255, 255, 255, 0.08);
+  font-style: italic;
+  font-size: 0.9em;
+  animation: fadeInFloat 1s ease forwards;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes fadeInFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+}
+
+.rin-auto-message:hover {
+  opacity: 1;
 }

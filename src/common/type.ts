@@ -7,3 +7,9 @@ export interface trackInterface {
   source?: string,
   authors?: string[],
 }
+
+export interface chatMessage {
+  role: string;
+  content: string;
+  isAuto?: boolean;
+}

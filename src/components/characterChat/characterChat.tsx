@@ -6,10 +6,13 @@ import TextInputWithSound from "../textInputWithSound";
 import { useLanguage } from "@/contexts/languageContext";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+import { chatMessage } from "@/common/type";
 
 export default function CharacterChat() {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
+  const [messages, setMessages] = useState<chatMessage[]>([]);
+
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const encouragementTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -23,9 +26,33 @@ export default function CharacterChat() {
     ZH_TW: "Chinese (Traditional)",
   }[lang];
   
+
+  // initial load from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem("characterChatMessages");
+    if (stored) {
+      setMessages(JSON.parse(stored));
+    }
+  }, []);
+
+  // save to localStorage on messages change
+  useEffect(() => {
+  const last20 = messages
+    .filter(m => !m.isAuto) // ignore auto messages
+    .slice(-20);
+  localStorage.setItem("characterChatMessages", JSON.stringify(last20));
+}, [messages]);
+
   useEffect(() => {
     const fetchWelcomeMessage = async () => {
       setLoading(true);
+      // Keep only the last 20 messages for context
+      const stored = localStorage.getItem("characterChatMessages");
+      const recentMessages = stored ? JSON.parse(stored).slice(-20) : [];
+      const contextString = recentMessages
+        .map((m: chatMessage) => `${m.role}: ${m.content}`)
+        .join("\n");
+
       try {
         const res = await fetch("/api/ollamaChat", {
           method: "POST",
@@ -33,13 +60,15 @@ export default function CharacterChat() {
           body: JSON.stringify({
             message: `
             As Rin, write a short and cozy greeting to the user in ${language}.
+            Based on the recent conversation:
+            ${contextString}
             Encourage them gently for the rest of the day, keeping a lo-fi, relaxed vibe.
           `,
           }),
         });
 
         const data = await res.json();
-        setMessages([{ role: "assistant", content: data.content || "(No welcome message)" }]);
+        setMessages(prev => [...prev, { role: "assistant", content: data.content || "(No welcome message)" }]);
       } catch (err) {
         console.error(err);
         setMessages([{ role: "assistant", content: "(Failed to load welcome message)" }]);
@@ -51,9 +80,10 @@ export default function CharacterChat() {
     fetchWelcomeMessage();
   }, []);
 
-    // Auto encouragement every 30-60 minutes
   useEffect(() => {
     const scheduleEncouragement = () => {
+      const recentMessages = messages.slice(-20);
+      const contextString = recentMessages.map(m => `${m.role}: ${m.content}`).join("\n");
       // const delay = 5000;
       function getRandomMinutes(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -66,7 +96,8 @@ export default function CharacterChat() {
 
       const prompt = `
       You are Rin, a friendly virtual assistant in a lo-fi cozy chat app.
-
+      Based on the recent conversation:
+      ${contextString}
       Write a short, warm message to the user in ${language}.
       - Remind them to take a little pause and breathe.
       - Encourage them in a kind, personal way.
@@ -87,7 +118,7 @@ export default function CharacterChat() {
           const data = await res.json();
           const content = data.content || "(No encouragement message)";
 
-          setMessages((prev) => [...prev, { role: "assistant", content }]);
+          setMessages((prev) => [...prev, { role: "assistant", content, isAuto: true }]);
         } catch (err) {
           console.error(err);
         } finally {
@@ -113,11 +144,26 @@ export default function CharacterChat() {
     setInput("");
     setLoading(true);
 
+    // Keep only the last 20 messages for context
+    const recentMessages = newMessages.slice(-20);
+    const contextString = recentMessages
+      .map(m => `${m.role}: ${m.content}`)
+      .join("\n");
+
+    const prompt = `
+    You are Rin, a cute and cozy AI girlfriend who loves lo-fi music vibes.
+    Based on the recent conversation:
+    ${contextString}
+
+    Write an affectionate reply in ${language}.
+    Keep it warm, playful, and natural, like a girlfriend texting you. Use Markdown where appropriate.
+    `;
+
     try {
       const res = await fetch("/api/ollamaChat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: prompt }),
       });
 
       const data = await res.json();
@@ -165,8 +211,20 @@ export default function CharacterChat() {
     <div className="container-bg characterchat-container">
       <div className="characterchat-message-container">
         {messages.map((m, i) => (
-          <div key={i} className={m.role === "assistant" ? "rin-message" : "user-message"}>
-            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+          <div
+            key={i}
+            className={
+              m.role === "assistant"
+                ? m.isAuto
+                  ? "rin-message rin-auto-message"
+                  : "rin-message"
+                : "user-message"
+            }
+          >
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+            >
               {m.content}
             </ReactMarkdown>
           </div>
