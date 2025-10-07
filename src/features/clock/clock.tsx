@@ -1,5 +1,4 @@
 'use client';
-import { useEffect, useState } from "react";
 import { useWeather } from "@/hooks/useWeather";
 import "./clock.scss";
 import { useTime } from "@/hooks/useTime";
@@ -18,11 +17,17 @@ export default function Clock() {
     <div className="clock-container">
       <h2 className="clock-time" >{currTime}</h2>
       <p>{currDate} ({currDay})</p>
-      {loadingWeather ?
-      <p>Loading weather...</p> :
-      error ?
-      <></> :
-      <p>{translate("weather", weather?.weathercode)} {weather?.temperature}°C</p> }
+      
+      {loadingWeather ? (
+        <p>Loading weather...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : (
+        <p>
+          {translate("weather", weather?.weathercode)} {weather?.temperature}°C
+        </p>
+      )}
+      
     </div>
   </>;
 }
