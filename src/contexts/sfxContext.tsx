@@ -24,16 +24,10 @@ export function SfxProvider({ children }: { children: ReactNode }) {
       try {
         const res = await fetch("/api/sfxinit");
         const data = await res.json();
-        const filtered = data.message.filter(
-          (fileName: string) =>
-            fileName !== "bell-notification-337658.mp3" &&
-            fileName !== "winner-bell-game-show-91932.mp3"
-        );
+        setSfxList(data.message);
 
-        setSfxList(filtered);
-
-        filtered.forEach((name: string) => {
-          const audio = new Audio(`sfx/${name}`);
+        data.message.forEach((name: string) => {
+          const audio = new Audio(`ambient sfx/${name}`);
           audio.preload = "none";
           audio.volume = 1;
           audio.onended = () => {

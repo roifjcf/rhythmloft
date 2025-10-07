@@ -1,6 +1,7 @@
 "use client";
 
 import { ChangeEvent } from "react";
+import TextInputWithSound from "../textInputWithSound";
 
 interface Props {
   value: string;
@@ -16,8 +17,7 @@ export default function SearchBar({ value, placeholder = "", onChange, className
 
   return (
     <div className={className}>
-      <input
-        type="text"
+      <TextInputWithSound
         value={value}
         placeholder={placeholder}
         onChange={handleChange}

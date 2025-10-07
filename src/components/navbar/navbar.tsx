@@ -6,6 +6,8 @@ import LanguageDropdown from "./components/languageDropdown";
 import { useLanguage } from "@/contexts/languageContext";
 import AmbientSound from "./components/ambientSound";
 import { usePlayer } from "@/contexts/playerContext";
+import TextInputWithSound from "../textInputWithSound";
+import { useState } from "react";
 
 export default function Navbar() {
   const { isOpen: isSfxMenuOpen, openModal: openConfigModal, closeModal: closeConfigModal } = useModal();
@@ -14,6 +16,7 @@ export default function Navbar() {
   const { translate } = useLanguage();
   const { resetIgnoredTracks, resetCustomTracks } = usePlayer();
 
+  const [preferredName, setPreferredName] = useState("");
   
   return (
     <div className="navbar-container">
@@ -31,6 +34,15 @@ export default function Navbar() {
           <button onClick={resetCustomTracks}>Reset loved tracks</button>
           <button onClick={resetIgnoredTracks}>Reset ignored tracks</button>
         </div>
+        <hr />
+        <h3>Preferences</h3>
+        <label htmlFor="preferred-user-name">Preferred name</label>
+        <TextInputWithSound
+          id="preferred-user-name"
+          placeholder="What do you want to be called?"
+          value={preferredName}
+          onChange={(e) => setPreferredName(e.target.value)}
+        />
       </Modal>
 
       <Modal isOpen={isHelpOpen} onClose={closeHelpModal}>

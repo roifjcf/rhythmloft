@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import "./characterchat.scss";
+import TextInputWithSound from "../textInputWithSound";
 
 export default function CharacterChat() {
   const [input, setInput] = useState("");
@@ -104,7 +105,7 @@ export default function CharacterChat() {
       </div>
 
       <div className="characterchat-input-container">
-        <input
+        <TextInputWithSound
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
