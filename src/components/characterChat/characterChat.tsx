@@ -4,6 +4,8 @@ import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import "./characterchat.scss";
 import TextInputWithSound from "../textInputWithSound";
 import { useLanguage } from "@/contexts/languageContext";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 
 export default function CharacterChat() {
   const [input, setInput] = useState("");
@@ -163,8 +165,10 @@ export default function CharacterChat() {
     <div className="container-bg characterchat-container">
       <div className="characterchat-message-container">
         {messages.map((m, i) => (
-          <div key={i}>
-            <span>{m.content}</span>
+          <div key={i} className={m.role === "assistant" ? "rin-message" : "user-message"}>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+              {m.content}
+            </ReactMarkdown>
           </div>
         ))}
         {loading && <p>Rin is thinking…</p>}
