@@ -15,11 +15,11 @@ export default function LanguageDropdown() {
 
   const toggleDropdown = () => setIsOpen(prev => !prev);
   const handleSelect = (selected: string) => {
-    setLang(selected as "EN" | "JP" | "ID");
+    setLang(selected as "EN" | "JP" | "ID" | "ZH_CN" | "ZH_TW");
     setIsOpen(false);
   };
 
-  const options = ["EN", "JP", "ID"];
+  const options = ["EN", "JP", "ID", "ZH_CN", "ZH_TW"];
 
   return (
     <div className="languagedropdown-container" ref={dropdownRef}>

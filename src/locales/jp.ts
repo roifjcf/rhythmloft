@@ -1,10 +1,10 @@
 export const jp = {
   "about-title": "rhythmloftについて",
   "about-content": [
-    "rhythmloft is a music player that plays chill lofi, developed by roifjcf.",
-    "Enjoy rhythmloft?",
+    "rhythmloftは、roifjcfによって開発されたチルいローファイ音楽プレイヤーです。",
+    "rhythmloftを気に入りましたか？",
     "Buy me a coffee!",
-    "Source code"
+    "ソースコード"
   ],
   "weather": {
     0: "快晴",

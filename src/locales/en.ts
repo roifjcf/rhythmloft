@@ -35,5 +35,5 @@ export const en = {
     95: "Thunderstorm",
     96: "Thunderstorm with slight hail",
     99: "Thunderstorm with heavy hail"
-  }
+  },
 };

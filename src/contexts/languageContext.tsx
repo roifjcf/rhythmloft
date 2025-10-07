@@ -3,9 +3,17 @@ import { createContext, useContext, useState, ReactNode, useEffect } from "react
 import { en } from "@/locales/en";
 import { jp } from "@/locales/jp";
 import { id } from "@/locales/id";
+import { zh_cn } from "@/locales/zh_cn";
+import { zh_tw } from "@/locales/zh_tw";
+import { Language } from "@/common/type";
 
-type Language = "EN" | "JP" | "ID";
-const translationsMap = { EN: en, JP: jp, ID: id };
+export const translationsMap = {
+  EN: en,
+  JP: jp,
+  ID: id,
+  ZH_CN: zh_cn,
+  ZH_TW: zh_tw,
+};
 
 interface LanguageContextType {
   lang: Language;

@@ -1,4 +1,5 @@
 export type PlayMode = 'repeat-one' | 'repeat' | 'shuffle';
+export type Language = "EN" | "JP" | "ID" | "ZH_CN" | "ZH_TW";
 
 export interface trackInterface {
   name: string,

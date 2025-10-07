@@ -1,10 +1,10 @@
 export const id = {
   "about-title": "Tentang rhythmloft",
   "about-content": [
-    "rhythmloft is a music player that plays chill lofi, developed by roifjcf.",
-    "Enjoy rhythmloft?",
+    "rhythmloft adalah pemutar musik lo-fi santai yang dikembangkan oleh roifjcf.",
+    "Suka dengan rhythmloft?",
     "Buy me a coffee!",
-    "Source code"
+    "Kode sumber"
   ],
   "weather": {
     0: "Cerah",

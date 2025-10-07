@@ -18,7 +18,9 @@
   }
 
   li {
+    width: 100%;
     padding: $space-1 $space-1;
+    text-align: center;
 
     &:hover {
       cursor: pointer;
