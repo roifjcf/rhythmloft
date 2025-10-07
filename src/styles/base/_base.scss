@@ -32,7 +32,7 @@ body {
   // background-color: $global-background;
   color: $white;
   letter-spacing: 1px;
-  @include aberration();
+  @include aberration-weak();
 }
 
 h2, h3 {
