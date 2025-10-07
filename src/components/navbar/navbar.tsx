@@ -5,44 +5,39 @@ import Modal from "../modal/modal";
 import LanguageDropdown from "./components/languageDropdown";
 import { useLanguage } from "@/contexts/languageContext";
 import AmbientSound from "./components/ambientSound";
+import { usePlayer } from "@/contexts/playerContext";
 
 export default function Navbar() {
-  const { isOpen: isSfxMenuOpen, openModal: openWandModal, closeModal: closeSfxMenu } = useModal();
+  const { isOpen: isSfxMenuOpen, openModal: openConfigModal, closeModal: closeConfigModal } = useModal();
   const { isOpen: isHelpOpen, openModal: openHelpModal, closeModal: closeHelpModal } = useModal();
 
   const { translate } = useLanguage();
-
+  const { resetIgnoredTracks, resetCustomTracks } = usePlayer();
 
   
   return (
     <div className="navbar-container">
-      {/* Wand Icon */}
-      <Icon src="img/icons/wand.png" alt="Ambient sound" size="sm" onClick={openWandModal} />
-
-      {/* Help Icon */}
+      <Icon src="img/icons/mix.png" alt="Config" size="sm" onClick={openConfigModal} />
       <Icon src="img/icons/help.png" alt="about" size="sm" onClick={openHelpModal} />
 
       <LanguageDropdown />
 
-      {/* Wand Modal */}
-      <Modal isOpen={isSfxMenuOpen} onClose={closeSfxMenu}>
-        <div className="navbar-modal-close-btn" onClick={closeSfxMenu}>
-          <Icon src="img/icons/cancel.png" alt="close" size="sm" />
-        </div>
+      <Modal isOpen={isSfxMenuOpen} onClose={closeConfigModal}>
+        <h3>Ambient sfx</h3>
         <AmbientSound />
+        <hr />
+        <h3>Settings</h3>
+        <div className="navbar-settings-buttons">
+          <button onClick={resetCustomTracks}>Reset loved tracks</button>
+          <button onClick={resetIgnoredTracks}>Reset ignored tracks</button>
+        </div>
       </Modal>
 
-      {/* Help Modal */}
       <Modal isOpen={isHelpOpen} onClose={closeHelpModal}>
-        <div className="navbar-modal-close-btn" onClick={closeHelpModal}>
-          <Icon src="img/icons/cancel.png" alt={"close"} size="sm" />
-        </div>
-        <div className="navbar-modal-content">
-          <h2>{translate("about-title")}</h2>
-          <p>{translate("about-content")[0]}</p>
-          <p>{translate("about-content")[1]} <a href="https://ko-fi.com/fcjfior" target="_blank">{translate("about-content")[2]}</a></p>
-          <p><a href="https://github.com/roifjcf/rhythmloft" target="_blank">{translate("about-content")[3]}</a></p>
-        </div>
+        <h2>{translate("about-title")}</h2>
+        <p>{translate("about-content")[0]}</p>
+        <p>{translate("about-content")[1]} <a href="https://ko-fi.com/fcjfior" target="_blank">{translate("about-content")[2]}</a></p>
+        <p><a href="https://github.com/roifjcf/rhythmloft" target="_blank">{translate("about-content")[3]}</a></p>
       </Modal>
     </div>
   );

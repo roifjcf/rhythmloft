@@ -16,22 +16,8 @@
   overflow: visible;
 }
 
-.navbar-modal-close-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: $space-2;
+.navbar-settings-buttons {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.navbar-modal-content {
-  width: 100%;
-  height: 100%;
-  padding: $space-8;
-
-  display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: $space-2;
 }

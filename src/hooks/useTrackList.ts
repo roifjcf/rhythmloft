@@ -21,5 +21,5 @@ export const useTrackList = (key: "customTracks" | "ignoredTracks") => {
     });
   };
 
-  return { tracks, toggleTrack };
+  return { tracks, toggleTrack, setTracks };
 };

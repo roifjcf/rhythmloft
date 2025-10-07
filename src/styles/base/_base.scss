@@ -35,7 +35,7 @@ body {
   @include aberration();
 }
 
-h2 {
+h2, h3 {
   font-size: $font-size-lg;
   font-weight: 400;
   @media (max-width: $breakpoint-lg) {
@@ -64,7 +64,11 @@ a {
   }
 }
 
-
+hr {
+  border: none;
+  border-top: 1px solid $white-transparent;
+  margin: $space-4 0;
+}
 
 button {
   padding: $space-1;

@@ -28,6 +28,8 @@ type PlayerContextType = {
   handlePlaySynthwave: () => void;
   toggleCustomTrack: (track: trackInterface) => void;
   toggleIgnoredTrack: (track: trackInterface) => void;
+  resetIgnoredTracks: () => void;
+  resetCustomTracks: () => void;
 };
 
 
@@ -43,8 +45,8 @@ export function usePlayer() {
 
 export function PlayerProvider({ children }: { children: ReactNode }) {
 
-  const { tracks: customTracks, toggleTrack: toggleCustomTrack } = useTrackList("customTracks");
-  const { tracks: ignoredTracks, toggleTrack: toggleIgnoredTrack } = useTrackList("ignoredTracks");
+  const { tracks: customTracks, toggleTrack: toggleCustomTrack, setTracks: setCustomTracks } = useTrackList("customTracks");
+  const { tracks: ignoredTracks, toggleTrack: toggleIgnoredTrack, setTracks: setIgnoredTracks } = useTrackList("ignoredTracks");
 
   const {
     tracks,
@@ -77,6 +79,16 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     setIsPlaying(true);
   }
 
+  const resetIgnoredTracks = () => {
+    localStorage.removeItem("ignoredTracks");
+    setIgnoredTracks([]);
+  };
+
+  const resetCustomTracks = () => {
+    localStorage.removeItem("customTracks");
+    setCustomTracks([]);
+  };
+
   return (
     <PlayerContext.Provider
       value={{
@@ -98,7 +110,9 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
         handlePlayLofi,
         handlePlaySynthwave,
         toggleCustomTrack,
-        toggleIgnoredTrack
+        toggleIgnoredTrack,
+        resetIgnoredTracks,
+        resetCustomTracks,
       }}
     >
       {children}
