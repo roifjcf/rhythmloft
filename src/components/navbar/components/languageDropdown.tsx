@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import Icon from "@/components/icon/icon";
 import { useLanguage } from "@/contexts/languageContext";

@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef } from "react";
 import { ChangeEvent } from "react";
 
@@ -18,15 +20,20 @@ export default function TextInputWithSound({
   onChange = () => {},
   onKeyDown,
 }: Props) {
-  const typingSoundRef = useRef<HTMLAudioElement>(new Audio("sfx/single-key-press-393908.mp3"));
+  const typingSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  if (typeof window !== "undefined" && !typingSoundRef.current) {
+    typingSoundRef.current = new Audio("sfx/single-key-press-393908.mp3");
+    typingSoundRef.current.volume = 0.2;
+  }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (onKeyDown) {
-      onKeyDown(e);
+    if (onKeyDown) onKeyDown(e);
+
+    if (typingSoundRef.current) {
+      typingSoundRef.current.currentTime = 0;
+      typingSoundRef.current.play().catch(() => {});
     }
-    const audio = typingSoundRef.current.cloneNode() as HTMLAudioElement;
-    audio.volume = 0.2;
-    audio.play().catch(() => {});
   };
 
   return (

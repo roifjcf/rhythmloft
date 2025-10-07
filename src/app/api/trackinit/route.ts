@@ -7,8 +7,8 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   // CDN
-  let jsonPathLofi = path.join(process.cwd(), 'public/trackinfo/tracks-lofi.json');
-  let jsonPathSynthwave = path.join(process.cwd(), 'public/trackinfo/tracks-synthwave.json');
+  const jsonPathLofi = path.join(process.cwd(), 'public/trackinfo/tracks-lofi.json');
+  const jsonPathSynthwave = path.join(process.cwd(), 'public/trackinfo/tracks-synthwave.json');
   let tracksLofi = [];
   let tracksSynthwave = [];
   try {

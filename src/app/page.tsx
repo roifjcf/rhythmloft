@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Playlist from "@/features/playlist/playlist";
 import PlayControl from "@/features/playControl/playControl";
-import Loading from "@/components/loading/loading";
 import Clock from "@/features/clock/clock";
 import { usePlayer } from "@/contexts/playerContext";
 import "./page.scss";

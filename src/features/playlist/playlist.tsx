@@ -4,7 +4,7 @@ import { usePlayer } from "@/contexts/playerContext";
 import "./playlist.scss";
 import { useState } from "react";
 import SearchBar from "@/components/searchBar/searchBar";
-import { isTrackIgnored, isInCustomPlaylist } from "@/utils/trackHelpers";
+import { isTrackIgnored } from "@/utils/trackHelpers";
 import TrackActionButtons from "@/components/trackActionButtons/trackActionButtons";
 
 interface Props {
@@ -15,14 +15,11 @@ interface Props {
 export default function Playlist({ playlistElement, handleShowPlayList }: Props) {
   const {
     tracks,
-    customTracks,
     ignoredTracks,
     currentTrack,
     handlePlaylistSongClick,
     handlePlayLofi,
     handlePlaySynthwave,
-    toggleCustomTrack,
-    toggleIgnoredTrack,
   } = usePlayer();
 
   const [selectedPlaylist, setSelectedPlaylist] = useState<"lofi" | "synthwave" | "custom">("lofi");

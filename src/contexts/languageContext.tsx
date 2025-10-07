@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 import { en } from "@/locales/en";
 import { jp } from "@/locales/jp";
 import { id } from "@/locales/id";
