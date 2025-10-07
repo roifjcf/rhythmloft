@@ -32,6 +32,22 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        showPlayList &&
+        playlistElement.current &&
+        !playlistElement.current.contains(event.target as Node)
+      ) {
+        setShowPlaylist(false);
+        playlistElement.current.style.width = "0%";
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showPlayList]);
+
   // keyboard control
   useEffect(() => {
     const handlePlayByKey = (e: KeyboardEvent) => {
@@ -59,6 +75,8 @@ export default function Home() {
             playlistElement={playlistElement}
             handleShowPlayList={handleShowPlayList}
           />
+      {showPlayList && <div className="blur-overlay"></div>}
+
         </div>
 
         <div className="mid">

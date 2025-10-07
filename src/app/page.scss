@@ -99,6 +99,21 @@
 
 
 
+.blur-overlay {
+  $backdrop: 2px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur($backdrop);
+  -webkit-backdrop-filter: blur($backdrop);
+  pointer-events: none;
+  z-index: 100;
+  background-color: rgba($dark-blue, 0.2);
+  pointer-events: auto; // prevent clicks through the overlay
+}
+
 .vaporwave-overlay {
   position: fixed;
   inset: 0;
