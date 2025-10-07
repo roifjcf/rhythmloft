@@ -11,7 +11,11 @@ import { chatMessage } from "@/common/type";
 
 export default function CharacterChat() {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<chatMessage[]>([]);
+  const [messages, setMessages] = useState<chatMessage[]>(() => {
+    const stored = localStorage.getItem("characterChatMessages");
+    return stored ? JSON.parse(stored) : [];
+  });
+  
 
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -46,9 +50,17 @@ export default function CharacterChat() {
   useEffect(() => {
     const fetchWelcomeMessage = async () => {
       setLoading(true);
-      // Keep only the last 20 messages for context
+
+      // 先讀 localStorage
       const stored = localStorage.getItem("characterChatMessages");
       const recentMessages = stored ? JSON.parse(stored).slice(-20) : [];
+
+      // 如果 localStorage 已經有消息，就不加載歡迎消息
+      if (recentMessages.length > 0) {
+        setLoading(false);
+        return;
+      }
+
       const contextString = recentMessages
         .map((m: chatMessage) => `${m.role}: ${m.content}`)
         .join("\n");
@@ -62,7 +74,7 @@ export default function CharacterChat() {
             As Rin, write a short and cozy greeting to the user in ${language}.
             Based on the recent conversation:
             ${contextString}
-            Encourage them gently for the rest of the day, keeping a lo-fi, relaxed vibe.
+            Encourage them gently for the rest of the day, keeping a relaxed vibe.
           `,
           }),
         });
@@ -95,7 +107,7 @@ export default function CharacterChat() {
       const timeOfDay = hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening";
 
       const prompt = `
-      You are Rin, a friendly virtual assistant in a lo-fi cozy chat app.
+      You are Rin, a friendly virtual assistant girlfriend in a cozy chat app.
       Based on the recent conversation:
       ${contextString}
       Write a short, warm message to the user in ${language}.
@@ -151,7 +163,7 @@ export default function CharacterChat() {
       .join("\n");
 
     const prompt = `
-    You are Rin, a cute and cozy AI girlfriend who loves lo-fi music vibes.
+    You are Rin, a cute and cozy AI girlfriend who loves relaxing music vibes.
     Based on the recent conversation:
     ${contextString}
 
