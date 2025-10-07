@@ -75,7 +75,11 @@ export default function Home() {
 
       <audio
         ref={bgmRef}
-        src={tracks && currentTrack !== null ? `${tracks[currentTrack].url}` : undefined}
+        src={
+          tracks && currentTrack !== null && tracks[currentTrack]
+            ? tracks[currentTrack].url
+            : undefined
+        }
         autoPlay
         preload="none"
         onEnded={handleNext}
