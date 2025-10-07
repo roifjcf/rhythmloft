@@ -15,27 +15,30 @@ export const usePlayback = (tracks: trackInterface[] | null) => {
   const handlePause = () => { bgmRef.current?.pause(); setIsPlaying(false); };
 
   const handleNext = () => {
-    if (!tracks || !bgmRef.current) return;
+    if (!tracks) return;
+
     if (playMode === "shuffle") {
       setCurrentTrack(Math.floor(Math.random() * tracks.length));
     } else if (playMode === "repeat") {
       setCurrentTrack((prev) => (prev! + 1) % tracks.length);
     } else if (playMode === "repeat-one") {
-      bgmRef.current.currentTime = 0;
+      if (bgmRef.current) bgmRef.current.currentTime = 0;
     }
-    handlePlay();
+
+    setIsPlaying(true); // auto play next track
   };
 
   const handlePrev = () => {
-    if (!tracks || !bgmRef.current) return;
+    if (!tracks) return;
+
     if (playMode === "shuffle") {
       setCurrentTrack(Math.floor(Math.random() * tracks.length));
     } else if (playMode === "repeat") {
-      setCurrentTrack((prev) => (prev! - 1 + tracks.length) % tracks.length);
+      setCurrentTrack((prev) => (prev! - 1) % tracks.length);
     } else if (playMode === "repeat-one") {
-      bgmRef.current.currentTime = 0;
+      if (bgmRef.current) bgmRef.current.currentTime = 0;
     }
-    handlePlay();
+    setIsPlaying(true); // auto play next track
   };
 
   // volume
@@ -44,6 +47,21 @@ export const usePlayback = (tracks: trackInterface[] | null) => {
       bgmRef.current.volume = volume;
     }
   }, [volume]);
+
+  // auto play next track
+  useEffect(() => {
+  if (bgmRef.current) {
+    if (isPlaying && bgmRef.current.src) {
+      bgmRef.current
+        .play()
+        .catch((err) => {
+          if (err.name !== "AbortError") console.error(err);
+        });
+    } else {
+      bgmRef.current.pause();
+    }
+  }
+}, [isPlaying, currentTrack, tracks]);
 
   return { currentTrack, setIsPlaying, setCurrentTrack, setPlayMode, isPlaying, playMode, volume, setVolume, bgmRef, handlePlay, handlePause, handleNext, handlePrev };
 };
