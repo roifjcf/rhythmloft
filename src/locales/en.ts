@@ -36,4 +36,13 @@ export const en = {
     96: "Thunderstorm with slight hail",
     99: "Thunderstorm with heavy hail"
   },
+  "day": {
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun"
+  }
 };

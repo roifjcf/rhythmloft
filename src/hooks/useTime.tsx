@@ -28,7 +28,7 @@ export function useTime() {
 
     const getDayString = () => {
       const now = new Date();
-      const weekNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const weekNames = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
       return weekNames[now.getDay()];
     }
 

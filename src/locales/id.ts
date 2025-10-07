@@ -35,5 +35,14 @@ export const id = {
     95: "Badai petir",
     96: "Badai petir dengan hujan es ringan",
     99: "Badai petir dengan hujan es lebat"
+  },
+  "day": {
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun"
   }
 };

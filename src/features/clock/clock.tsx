@@ -10,13 +10,13 @@ export default function Clock() {
   const { weather, loadingWeather, error } = useWeather();
 
   const { translate } = useLanguage();
-
+  const translatedDay = translate("day", currDay.toLowerCase());
   
 
   return <>
     <div className="clock-container">
       <h2 className="clock-time" >{currTime}</h2>
-      <p>{currDate} ({currDay})</p>
+      <p>{currDate} ({translatedDay})</p>
       
       {loadingWeather ? (
         <p>Loading weather...</p>
