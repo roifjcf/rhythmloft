@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PlayerProvider } from "@/contexts/playerContext";
 import "@/styles/main.scss";
 import { LanguageProvider } from "@/contexts/languageContext";
+import { SfxProvider } from "@/contexts/sfxContext";
 
 export const metadata: Metadata = {
   title: "rhythmloft | Online Lo-fi Music Player",
@@ -34,7 +35,9 @@ export default function RootLayout({
       <body>
         <PlayerProvider>
           <LanguageProvider>
-            {children}
+            <SfxProvider>
+              {children}
+            </SfxProvider>
           </LanguageProvider>
         </PlayerProvider>
       </body>

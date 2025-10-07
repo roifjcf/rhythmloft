@@ -1,21 +1,9 @@
+import { useSfx } from "@/contexts/sfxContext";
 import SfxUnit from "./sfxUnit";
 import "./ambientSound.scss";
 
-interface Props {
-  sfxList: string[] | null;
-  toggleSfx: (name: string) => void;
-  sfxVolumes: { [key: string]: number };
-  setSfxVolume: (name: string, volume: number) => void;
-  sfxPlaying: { [key: string]: boolean };
-}
-
-export default function AmbientSound({
-  sfxList,
-  toggleSfx,
-  sfxVolumes,
-  setSfxVolume,
-  sfxPlaying
-}: Props) {
+export default function AmbientSound() {
+  const { sfxList, sfxVolumes, sfxPlaying, toggleSfx, setSfxVolume } = useSfx();
 
   return (
     <div className="ambientsound-container">

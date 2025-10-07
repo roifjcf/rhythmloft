@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./sfxunit.scss";
 import Icon from "@/components/icon/icon";
 
