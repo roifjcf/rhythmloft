@@ -42,6 +42,10 @@
   th {
     text-align: left;
   }
+
+  &>div {
+    margin: $space-4 0;
+  }
 }
 
 .characterchat-input-container {
@@ -66,9 +70,6 @@
   color: $white-transparent-mid;
 }
 
-.characterchat-message {
-  margin: $space-4 0;
-}
 
 .characterchat-auto-message {
   opacity: 0.6;

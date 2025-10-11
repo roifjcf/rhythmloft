@@ -11,5 +11,6 @@ export interface trackInterface {
 export interface chatMessage {
   role: string;
   content: string;
+  sender: string;
   isAuto?: boolean;
 }
