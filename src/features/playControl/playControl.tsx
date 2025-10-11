@@ -69,17 +69,17 @@ export default function PlayControl({
 
     <div className="playcontrol-buttons">
         <div className="left">
-          <Icon src="img/icons/left.png" alt="prev" onClick={handlePrev} />
+          <Icon size="sm" src="img/icons/left.png" alt="prev" onClick={handlePrev} />
           {isPlaying ?
-            <Icon src="img/icons/pause.png" alt="pause" onClick={handlePause} /> :
-            <Icon src="img/icons/play.png" alt="play" onClick={handlePlay} />
+            <Icon size="sm" src="img/icons/pause.png" alt="pause" onClick={handlePause} /> :
+            <Icon size="sm" src="img/icons/play.png" alt="play" onClick={handlePlay} />
           }
-          <Icon src="img/icons/right.png" alt="next" onClick={handleNext} />
+          <Icon size="sm" src="img/icons/right.png" alt="next" onClick={handleNext} />
         </div>
 
         <div className="right">
-          <Icon src={`img/icons/${playMode}.png`} alt={playMode} onClick={() => setPlayMode(nextPlayMode())} />
-          <Icon src="img/icons/music-list.png" alt="music-list" onClick={handleShowPlayList} />
+          <Icon size="sm" src={`img/icons/${playMode}.png`} alt={playMode} onClick={() => setPlayMode(nextPlayMode())} />
+          <Icon size="sm" src="img/icons/music-list.png" alt="music-list" onClick={handleShowPlayList} />
         </div>
       </div>
 
