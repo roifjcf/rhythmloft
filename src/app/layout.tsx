@@ -30,7 +30,7 @@ export default function RootLayout({
       <head>
         <meta name="author" content="roifjcf"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <meta name="google-site-verification" content="2T2_NwItqAKWYw18LZDgFpbZpjMLKb3TDZLF-It4OWg" />
+        <meta name="google-site-verification" content="2nOazwvlTyMgqSmihXt5bCsqzyYrkALjgiRsvtkoaIA" />
       </head>
       <body>
         <PlayerProvider>
