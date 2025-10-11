@@ -16,6 +16,7 @@ A music player that plays relaxing music.
   - [Pixabay](https://pixabay.com/)
 - Music
   - [Pixabay](https://pixabay.com/)
+  - [Chosic](https://www.chosic.com/)
 - APIs
   - [🌤️ Free Open-Source Weather API | Open-Meteo.com](https://open-meteo.com/)
 
