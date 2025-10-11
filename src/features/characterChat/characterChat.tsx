@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import "./characterchat.scss";
-import TextInputWithSound from "../textInputWithSound";
+import TextInputWithSound from "../../components/textInputWithSound";
 import { useLanguage } from "@/contexts/languageContext";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";

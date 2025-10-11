@@ -8,7 +8,7 @@ import { usePlayer } from "@/contexts/playerContext";
 import "./page.scss";
 import Navbar from "@/components/navbar/navbar";
 import Pomodoro from "@/features/pomodoro/pomodoro";
-import CharacterChat from "@/components/characterChat/characterChat";
+import CharacterChat from "@/features/characterChat/characterChat";
 
 export default function Home() {
   const {
