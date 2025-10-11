@@ -9,7 +9,14 @@ import { usePlayer } from "@/contexts/playerContext";
 import TextInputWithSound from "../textInputWithSound";
 import { useState } from "react";
 
-export default function Navbar() {
+interface Props {
+  isMobile: boolean;
+  toggleChat: () => void;
+}
+
+
+export default function Navbar({ isMobile, toggleChat }: Props) {
+
   const { isOpen: isSfxMenuOpen, openModal: openConfigModal, closeModal: closeConfigModal } = useModal();
   const { isOpen: isHelpOpen, openModal: openHelpModal, closeModal: closeHelpModal } = useModal();
 
@@ -20,6 +27,14 @@ export default function Navbar() {
   
   return (
     <div className="navbar-container">
+      {isMobile && (
+        <Icon
+          src="img/icons/sms.png"
+          alt="totgle chat"
+          size="sm"
+          onClick={toggleChat}
+        />
+      )}
       <Icon src="img/icons/mix.png" alt="Config" size="sm" onClick={openConfigModal} />
       <Icon src="img/icons/help.png" alt="about" size="sm" onClick={openHelpModal} />
 
@@ -31,6 +46,7 @@ export default function Navbar() {
         <hr />
         <h3>Settings</h3>
         <div className="navbar-settings-buttons">
+          
           <button onClick={resetCustomTracks}>Reset loved tracks</button>
           <button onClick={resetIgnoredTracks}>Reset ignored tracks</button>
           <button onClick={()=>{localStorage.removeItem("characterChatMessages");}}>Clear chat messages</button>

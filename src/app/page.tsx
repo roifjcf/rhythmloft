@@ -43,6 +43,16 @@ export default function Home() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showPlayList]);
 
+  const [showChat, setShowChat] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+
   // keyboard control
   useEffect(() => {
     const handlePlayByKey = (e: KeyboardEvent) => {
@@ -58,6 +68,7 @@ export default function Home() {
     return () => window.removeEventListener("keydown", handlePlayByKey);
   }, [isPlaying, handlePlay, handlePause]);
 
+  
   return (
     <>
     <div className="page retro-screen">
@@ -67,11 +78,13 @@ export default function Home() {
       <div className="content">
 
         <div className="left">
-          <CharacterChat />
+          
+          {(!isMobile || showChat) && <CharacterChat />}
         </div>
 
         <div className="right">
           <Clock />
+          
           <Pomodoro />
           <PlayControl handleShowPlayList={handleShowPlayList} />
         </div>
@@ -79,7 +92,10 @@ export default function Home() {
       </div>
 
 
-      <Navbar />
+      <Navbar
+        isMobile={isMobile}
+        toggleChat={() => setShowChat((prev) => !prev)}
+      />
 
 
       {showPlayList &&

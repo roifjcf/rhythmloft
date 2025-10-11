@@ -44,17 +44,17 @@
     width: 40%;
     padding: 0 $space-12;
     justify-content: flex-end;
-  }
-
-  >.right {
+    
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: $space-2;
 
 
     @media (max-width: $breakpoint-md) {
-      min-width: 70%;
-
+      width: 95%;
+      padding: 0 $space-4;
+      
       position: absolute;
       bottom: 0; right: 50%;
       transform: translate(50%,0%);

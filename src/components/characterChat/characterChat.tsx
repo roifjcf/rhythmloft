@@ -220,9 +220,9 @@ export default function CharacterChat() {
             className={
               m.role === "assistant"
                 ? m.isAuto
-                  ? "rin-message rin-auto-message"
-                  : "rin-message"
-                : "user-message"
+                  ? "characterchat-message characterchat-auto-message"
+                  : ""
+                : "characterchat-message"
             }
           >
             <div className="message-role">{m.role === "assistant" ? "Rin" : "You"}</div>
@@ -235,6 +235,7 @@ export default function CharacterChat() {
           </div>
         ))}
         {loading && <p>Rin is thinking…</p>}
+        {/* scroll to bottom */}
         <div ref={messagesEndRef} />
       </div>
 

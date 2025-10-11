@@ -7,9 +7,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  
-
+  @media (max-width: $breakpoint-md) {
+    padding-top: 32px;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+  }
 }
 
 .characterchat-message-container {
@@ -51,14 +56,28 @@
 }
 
 
-.rin-auto-message {
-  opacity: 0.7;
-  background: rgba(255, 255, 255, 0.08);
-  font-style: italic;
+
+
+
+
+.message-role {
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: $white-transparent-mid;
+}
+
+.characterchat-message {
+  margin: $space-4 0;
+}
+
+.characterchat-auto-message {
+  opacity: 0.6;
   font-size: 0.9em;
   animation: fadeInFloat 1s ease forwards;
   transition: opacity 0.3s ease;
 }
+
+
 
 @keyframes fadeInFloat {
   0% {
@@ -69,20 +88,4 @@
     opacity: 0.7;
     transform: translateY(0);
   }
-}
-
-.rin-auto-message:hover {
-  opacity: 1;
-}
-
-.message-role {
-  font-weight: bold;
-  margin-bottom: 2px;
-  color: #555;
-}
-.rin-message .message-role {
-  color: $blue;
-}
-.user-message .message-role {
-  color: $white;
 }
