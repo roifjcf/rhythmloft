@@ -30,14 +30,12 @@ export function SfxProvider({ children }: { children: ReactNode }) {
           const audio = new Audio(`ambient sfx/${name}`);
           audio.preload = "none";
           audio.volume = 1;
-          audio.onended = () => {
-            audio.currentTime = 0; // reset to start
-            setSfxPlaying(prev => ({ ...prev, [name]: false }));
-          };
+          audio.loop = true; // Loop the SFX
           sfxRefs.current[name] = audio;
           setSfxVolumes(prev => ({ ...prev, [name]: 1 }));
           setSfxPlaying(prev => ({ ...prev, [name]: false }));
         });
+
       } catch (error) {
         console.error("Failed to fetch SFX list:", error);
       }

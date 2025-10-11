@@ -45,11 +45,9 @@ export default function CharacterChat() {
     const fetchWelcomeMessage = async () => {
       setLoading(true);
 
-      // 先讀 localStorage
       const stored = localStorage.getItem("characterChatMessages");
       const recentMessages = stored ? JSON.parse(stored).slice(-20) : [];
 
-      // 如果 localStorage 已經有消息，就不加載歡迎消息
       if (recentMessages.length > 0) {
         setLoading(false);
         return;
