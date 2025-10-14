@@ -40,9 +40,9 @@ export default function PlayControl({
   const renderAuthor = () => {
     if (!tracks || currentTrack == null) return null;
     const track = tracks[currentTrack];
-    const authorStr = track.authors?.join(", ");
     if (!track || !track.authors || track.authors.length === 0) return null;
-
+    const authorStr = track.authors.join(", ");
+    
     return (
       <p>{authorStr}</p>
     );
