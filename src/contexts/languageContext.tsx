@@ -27,16 +27,26 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Language>("EN");
 
-  const translate = (key: string, subKey?: string | number) => {
+  const translate = (key: string, subKey?: string | number): string => {
     const current = translationsMap[lang] as Record<string, any>;
-    const value = key in current ? current[key] : en[key as keyof typeof en] ?? key;
+    const fallbackLang = en;
+    const value = key in current ? current[key] : fallbackLang[key as keyof typeof en];
 
-    if (subKey != null && typeof value === "object") {
-      return value[subKey] ?? key;
+    if (typeof value === "object" && value !== null) {
+      if (subKey != null && subKey in value) {
+        return String(value[subKey]);
+      } else {
+        return "[missing subKey]";
+      }
     }
 
-    return value;
+    if (typeof value === "string") {
+      return value;
+    }
+
+    return String(key);
   };
+
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t: translationsMap[lang], translate }}>
