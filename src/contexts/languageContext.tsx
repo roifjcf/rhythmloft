@@ -32,15 +32,20 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const fallbackLang = en;
     const value = key in current ? current[key] : fallbackLang[key as keyof typeof en] ?? key;
 
-    if (subKey != null && typeof value === "object" && value !== null) {
-      const normalizedKey = String(subKey);
-      return String(value[normalizedKey] ?? key);
+    if (typeof value === "object" && value !== null) {
+      if (subKey != null) {
+        const normalizedKey = String(subKey);
+        return String(value[normalizedKey] ?? "Unknown");
+      } else {
+        return "Unknown";
+      }
     }
 
     if (typeof value === "string") return value;
 
     return String(value);
   };
+
 
 
   return (

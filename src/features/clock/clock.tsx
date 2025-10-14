@@ -23,7 +23,7 @@ export default function Clock() {
         <p>Error: {error}</p>
       ) : (
         <p>
-          {translate("weather", weather?.weathercode)} {weather?.temperature}°C
+          {translate("weather", weather?.weathercode)} {weather?.temperature ?? "--"}°C
         </p>
       )}
       
