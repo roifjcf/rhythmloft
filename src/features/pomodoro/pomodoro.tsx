@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./pomodoro.scss";
 import Icon from "@/components/icon/icon";
+import { useLanguage } from "@/contexts/languageContext";
 
 type Mode = "work" | "break";
 
@@ -70,9 +71,16 @@ export default function Pomodoro({
   };
 
 
+  const { translate } = useLanguage();
+  
+
   return (
     <div className={`pomodoro-container container-bg ${mode}`}>
-      <p className="pomodoro-mode">{mode === "work" ? "Work" : "Break"}</p>
+      <p className="pomodoro-mode">
+        {mode === "work" 
+          ? translate("pomodoro-status.work") 
+          : translate("pomodoro-status.break")}
+      </p>
       <p className="pomodoro-timer">{formatTime(timeLeft)}</p>
       <div className="pomodoro-controls">
         {isRunning ?

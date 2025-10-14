@@ -1,11 +1,11 @@
 export const id = {
   "about-title": "Tentang rhythmloft",
-  "about-content": [
-    "rhythmloft adalah pemutar musik lo-fi santai yang dikembangkan oleh roifjcf.",
-    "Suka dengan rhythmloft?",
-    "Buy me a coffee!",
-    "Kode sumber"
-  ],
+  "about-content": {
+    0: "rhythmloft adalah pemutar musik lo-fi santai yang dikembangkan oleh roifjcf.",
+    1: "Suka dengan rhythmloft?",
+    2: "Buy me a coffee!",
+    3: "Kode sumber"
+  },
   "weather": {
     0: "Cerah",
     1: "Hampir cerah",
@@ -44,5 +44,30 @@ export const id = {
     "fri": "Fri",
     "sat": "Sat",
     "sun": "Sun"
+  },
+  "pomodoro-status": {
+    work: "Bekerja",
+    break: "Istirahat"
+  },
+  "setting-menu": {
+    "ambient-sfx": "Efek suara ambient",
+    "settings": "Pengaturan",
+    "settings-items": {
+      "reset-loved-tracks": "Atur ulang lagu favorit",
+      "reset-ignored-tracks": "Atur ulang lagu yang diabaikan",
+      "clear-chat-messages": "Hapus pesan obrolan"
+    },
+    "preferences": "Preferensi",
+    "preferences-items": {
+      "preferred-name": "Nama pilihan",
+      "preferred-name-placeholder": "Ingin dipanggil apa?"
+    }
+  },
+  "music-genre": {
+    "lofi": "Lo-fi",
+    "synthwave": "Synthwave",
+    "custom": "Custom"
   }
+
+
 };

@@ -1,11 +1,11 @@
 export const jp = {
   "about-title": "rhythmloftについて",
-  "about-content": [
-    "rhythmloftは、roifjcfによって開発されたチルいローファイ音楽プレイヤーです。",
-    "rhythmloftを気に入りましたか？",
-    "Buy me a coffee!",
-    "ソースコード"
-  ],
+  "about-content": {
+    0: "rhythmloftは、roifjcfによって開発されたチルいローファイ音楽プレイヤーです。",
+    1: "rhythmloftを気に入りましたか？",
+    2: "Buy me a coffee!",
+    3: "ソースコード"
+  },
   "weather": {
     0: "快晴",
     1: "ほぼ快晴",
@@ -44,5 +44,28 @@ export const jp = {
     "fri": "金",
     "sat": "土",
     "sun": "日"
+  },
+  "pomodoro-status": {
+    work: "作業",
+    break: "休憩"
+  },
+  "setting-menu": {
+    "ambient-sfx": "環境効果音",
+    "settings": "設定",
+    "settings-items": {
+      "reset-loved-tracks": "お気に入りトラックをリセット",
+      "reset-ignored-tracks": "無視したトラックをリセット",
+      "clear-chat-messages": "チャットメッセージを消去"
+    },
+    "preferences": "環境設定",
+    "preferences-items": {
+      "preferred-name": "表示名",
+      "preferred-name-placeholder": "呼ばれたい名前は？"
+    }
+  },
+  "music-genre": {
+    "lofi": "Lo-fi",
+    "synthwave": "Synthwave",
+    "custom": "Custom"
   }
 };

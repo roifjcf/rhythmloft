@@ -27,24 +27,19 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Language>("EN");
 
-  const translate = (key: string, subKey?: string | number): string => {
+  const translate = (path: string): string => {
     const current = translationsMap[lang] as Record<string, any>;
-    const fallbackLang = en;
-    const value = key in current ? current[key] : fallbackLang[key as keyof typeof en] ?? key;
+    const fallback = translationsMap["EN"] as Record<string, any>;
 
-    if (typeof value === "object" && value !== null) {
-      if (subKey != null) {
-        const normalizedKey = String(subKey);
-        return String(value[normalizedKey] ?? "Unknown");
-      } else {
-        return "Unknown";
-      }
-    }
+    const getValue = (obj: Record<string, any> | undefined, keys: string[]): any =>
+      keys.reduce((acc, key) => (acc && key in acc ? acc[key] : undefined), obj);
 
-    if (typeof value === "string") return value;
+    const keys = path.split(".");
+    const value = getValue(current, keys) ?? getValue(fallback, keys) ?? path;
 
-    return String(value);
+    return typeof value === "string" ? value : "Unknown";
   };
+
 
 
 

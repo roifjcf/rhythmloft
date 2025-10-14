@@ -41,22 +41,30 @@ export default function Navbar({ isMobile, toggleChat }: Props) {
       <LanguageDropdown />
 
       <Modal isOpen={isSfxMenuOpen} onClose={closeConfigModal}>
-        <h3>Ambient sfx</h3>
+        <h3>{translate("setting-menu.ambient-sfx")}</h3>
         <AmbientSound />
         <hr />
-        <h3>Settings</h3>
+        <h3>{translate("setting-menu.settings")}</h3>
         <div className="navbar-settings-buttons">
           
-          <button onClick={resetCustomTracks}>Reset loved tracks</button>
-          <button onClick={resetIgnoredTracks}>Reset ignored tracks</button>
-          <button onClick={()=>{localStorage.removeItem("characterChatMessages");}}>Clear chat messages</button>
+          <button onClick={resetCustomTracks}>
+            {translate("setting-menu.settings-items.reset-loved-tracks")}
+          </button>
+          <button onClick={resetIgnoredTracks}>
+            {translate("setting-menu.settings-items.reset-ignored-tracks")}
+          </button>
+          <button onClick={()=>{localStorage.removeItem("characterChatMessages");}}>
+            {translate("setting-menu.settings-items.clear-chat-messages")}
+          </button>
         </div>
         <hr />
-        <h3>Preferences</h3>
-        <label htmlFor="preferred-user-name">Preferred name</label>
+        <h3>{translate("setting-menu.preferences")}</h3>
+        <label htmlFor="preferred-user-name">
+          {translate("setting-menu.preferences-items.preferred-name")}
+        </label>
         <TextInputWithSound
           id="preferred-user-name"
-          placeholder="What do you want to be called?"
+          placeholder={translate("setting-menu.preferences-items.preferred-name-placeholder")}
           value={preferredName}
           onChange={(e) => setPreferredName(e.target.value)}
         />
@@ -64,9 +72,9 @@ export default function Navbar({ isMobile, toggleChat }: Props) {
 
       <Modal isOpen={isHelpOpen} onClose={closeHelpModal}>
         <h2>{translate("about-title")}</h2>
-        <p>{translate("about-content")[0]}</p>
-        <p>{translate("about-content")[1]} <a href="https://ko-fi.com/fcjfior" target="_blank">{translate("about-content")[2]}</a></p>
-        <p><a href="https://github.com/roifjcf/rhythmloft" target="_blank">{translate("about-content")[3]}</a></p>
+        <p>{translate("about-content.0")}</p>
+        <p>{translate("about-content.1")} <a href="https://ko-fi.com/fcjfior" target="_blank">{translate("about-content.2")}</a></p>
+        <p><a href="https://github.com/roifjcf/rhythmloft" target="_blank">{translate("about-content.3")}</a></p>
       </Modal>
     </div>
   );

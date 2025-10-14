@@ -1,11 +1,11 @@
 export const zh_cn = {
   "about-title": "关于 rhythmloft",
-  "about-content": [
-    "rhythmloft 是由 roifjcf 开发的轻松 lo-fi 音乐播放器。",
-    "喜欢 rhythmloft 吗？",
-    "Buy me a coffee!",
-    "源代码"
-  ],
+  "about-content": {
+    0: "rhythmloft 是由 roifjcf 开发的轻松 lo-fi 音乐播放器。",
+    1: "喜欢 rhythmloft 吗？",
+    2: "Buy me a coffee!",
+    3: "源代码"
+  },
   "weather": {
     0: "晴朗",
     1: "多为晴天",
@@ -44,5 +44,29 @@ export const zh_cn = {
     "fri": "周五",
     "sat": "周六",
     "sun": "周日"
+  },
+  "pomodoro-status": {
+    work: "工作中",
+    break: "休息"
+  },
+  "setting-menu": {
+    "ambient-sfx": "环境音效",
+    "settings": "设置",
+    "settings-items": {
+      "reset-loved-tracks": "重置喜欢的曲目",
+      "reset-ignored-tracks": "重置忽略的曲目",
+      "clear-chat-messages": "清除聊天消息"
+    },
+    "preferences": "偏好设置",
+    "preferences-items": {
+      "preferred-name": "昵称",
+      "preferred-name-placeholder": "你希望别人怎么称呼你？"
+    }
+  },
+  "music-genre": {
+    "lofi": "Lo-fi",
+    "synthwave": "Synthwave",
+    "custom": "Custom"
   }
+
 };
