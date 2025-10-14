@@ -77,7 +77,7 @@ export default function Playlist({ playlistElement, handleShowPlayList }: Props)
         />
       </div>
 
-      <div className="playlist-tracks">
+      <div className="playlist-tracks scroll-bar">
         {filteredTracks.length > 0 ? (
           filteredTracks.map((track, i) => {
             const ignored = isTrackIgnored(track, ignoredTracks);

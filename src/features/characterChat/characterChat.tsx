@@ -213,7 +213,7 @@ export default function CharacterChat() {
 
   return (
     <div className="container-bg characterchat-container">
-      <div className="characterchat-message-container">
+      <div className="characterchat-message-container scroll-bar">
         {(messages ?? []).map((m, i) => (
           <div
             key={i}

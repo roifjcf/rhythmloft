@@ -20,8 +20,7 @@
 
 .characterchat-message-container {
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: $black-transparent-low $transparent;
+  
 
   ul, ol {
     list-style: none; /* remove default bullets */

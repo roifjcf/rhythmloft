@@ -155,6 +155,10 @@ button {
   }
 }
 
+.scroll-bar {
+  scrollbar-width: thin;
+  scrollbar-color: $black-transparent-low $transparent;
+}
 
 // .slider {
 //   // https://stackoverflow.com/questions/70999024/how-to-change-color-size-and-shape-of-elements-in-a-range-slider
