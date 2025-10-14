@@ -45,6 +45,7 @@ export default function TextInputWithSound({
       onKeyDown={handleKeyDown}
       value={value}
       onChange={onChange}
+      autoComplete="off"
     />
   );
 }
