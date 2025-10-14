@@ -12,7 +12,6 @@ export default function Clock() {
   const { translate } = useLanguage();
   const translatedDay = translate("day", currDay.toLowerCase());
   
-console.log("translate(weather)", translate("weather", weather?.weathercode));
   return <>
     <div className="clock-container">
       <h2 className="clock-time" >{currTime}</h2>

@@ -33,8 +33,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const value = key in current ? current[key] : fallbackLang[key as keyof typeof en];
 
     if (typeof value === "object" && value !== null) {
-      if (subKey != null && subKey in value) {
-        return String(value[subKey]);
+      if (subKey != null && String(subKey) in value) {
+        return String(value[String(subKey)]);
       } else {
         return "[missing subKey]";
       }
