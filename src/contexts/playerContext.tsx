@@ -26,6 +26,7 @@ type PlayerContextType = {
   setVolume: (v: number) => void;
   handlePlayLofi: () => void;
   handlePlaySynthwave: () => void;
+  handlePlayCustomTracks: () => void;
   toggleCustomTrack: (track: trackInterface) => void;
   toggleIgnoredTrack: (track: trackInterface) => void;
   resetIgnoredTracks: () => void;
@@ -79,6 +80,12 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     setIsPlaying(true);
   }
 
+  const handlePlayCustomTracks = () => {
+    if (!customTracks) return;
+    setTracks(customTracks);
+    setIsPlaying(true);
+  }
+
   const resetIgnoredTracks = () => {
     localStorage.removeItem("ignoredTracks");
     setIgnoredTracks([]);
@@ -109,6 +116,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
         bgmRef,
         handlePlayLofi,
         handlePlaySynthwave,
+        handlePlayCustomTracks,
         toggleCustomTrack,
         toggleIgnoredTrack,
         resetIgnoredTracks,

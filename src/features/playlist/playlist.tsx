@@ -21,6 +21,7 @@ export default function Playlist({ playlistElement, handleShowPlayList }: Props)
     handlePlaylistSongClick,
     handlePlayLofi,
     handlePlaySynthwave,
+    handlePlayCustomTracks
   } = usePlayer();
 
   const [selectedPlaylist, setSelectedPlaylist] = useState<"lofi" | "synthwave" | "custom">("lofi");
@@ -62,7 +63,7 @@ export default function Playlist({ playlistElement, handleShowPlayList }: Props)
           </button>
           <button
             className={selectedPlaylist === "custom" ? "playlist-buttons--selected" : ""}
-            onClick={() => handleSelectPlaylist("custom")}
+            onClick={() => handleSelectPlaylist("custom", handlePlayCustomTracks)}
           >
             Custom
           </button>
