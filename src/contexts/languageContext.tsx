@@ -30,21 +30,16 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const translate = (key: string, subKey?: string | number): string => {
     const current = translationsMap[lang] as Record<string, any>;
     const fallbackLang = en;
-    const value = key in current ? current[key] : fallbackLang[key as keyof typeof en];
+    const value = key in current ? current[key] : fallbackLang[key as keyof typeof en] ?? key;
 
-    if (typeof value === "object" && value !== null) {
-      if (subKey != null && String(subKey) in value) {
-        return String(value[String(subKey)]);
-      } else {
-        return "[missing subKey]";
-      }
+    if (subKey != null && typeof value === "object" && value !== null) {
+      const normalizedKey = String(subKey);
+      return String(value[normalizedKey] ?? key);
     }
 
-    if (typeof value === "string") {
-      return value;
-    }
+    if (typeof value === "string") return value;
 
-    return String(key);
+    return String(value);
   };
 
 
