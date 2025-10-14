@@ -1,67 +1,90 @@
 import { useState, useRef, useEffect } from "react";
 import { trackInterface, PlayMode } from "@/common/type";
 
-export const usePlayback = (tracks: trackInterface[] | null) => {
-
-  const [currentTrack, setCurrentTrack] = useState<number | null>(0); // track number
+export const usePlayback = (
+  tracks: trackInterface[] | null,
+  ignoredTracks: string[] = [] // urls
+) => {
+  const [currentTrack, setCurrentTrack] = useState<number | null>(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playMode, setPlayMode] = useState<PlayMode>("shuffle");
   const [volume, setVolume] = useState(1);
   const bgmRef = useRef<HTMLAudioElement>(null);
 
+  const getNextTrackIndex = (direction: 1 | -1 = 1) => {
+    if (!tracks) return null;
+    const total = tracks.length;
+    let next = currentTrack !== null ? currentTrack : 0;
 
-  const handlePlay = () => { bgmRef.current?.play(); setIsPlaying(true); };
+    for (let i = 0; i < total; i++) {
+      if (playMode === "shuffle") {
+        next = Math.floor(Math.random() * total);
+      } else {
+        next = (next + direction + total) % total;
+      }
 
-  const handlePause = () => { bgmRef.current?.pause(); setIsPlaying(false); };
-
-  const handleNext = () => {
-    if (!tracks) return;
-
-    if (playMode === "shuffle") {
-      setCurrentTrack(Math.floor(Math.random() * tracks.length));
-    } else if (playMode === "repeat") {
-      setCurrentTrack((prev) => (prev! + 1) % tracks.length);
-    } else if (playMode === "repeat-one") {
-      if (bgmRef.current) bgmRef.current.currentTime = 0;
+      if (!ignoredTracks.includes(tracks[next].url)) {
+        return next;
+      }
     }
 
-    setIsPlaying(true); // auto play next track
+    return null;
+  };
+
+  const handlePlay = () => {
+    if (bgmRef.current) bgmRef.current.play();
+    setIsPlaying(true);
+  };
+
+  const handlePause = () => {
+    if (bgmRef.current) bgmRef.current.pause();
+    setIsPlaying(false);
+  };
+
+  const handleNext = () => {
+    const next = getNextTrackIndex(1);
+    if (next !== null) setCurrentTrack(next);
+    setIsPlaying(true);
   };
 
   const handlePrev = () => {
-    if (!tracks) return;
-
-    if (playMode === "shuffle") {
-      setCurrentTrack(Math.floor(Math.random() * tracks.length));
-    } else if (playMode === "repeat") {
-      setCurrentTrack((prev) => (prev! - 1) % tracks.length);
-    } else if (playMode === "repeat-one") {
-      if (bgmRef.current) bgmRef.current.currentTime = 0;
-    }
-    setIsPlaying(true); // auto play next track
+    const prev = getNextTrackIndex(-1);
+    if (prev !== null) setCurrentTrack(prev);
+    setIsPlaying(true);
   };
 
   // volume
   useEffect(() => {
-    if (bgmRef.current) {
-      bgmRef.current.volume = volume;
-    }
+    if (bgmRef.current) bgmRef.current.volume = volume;
   }, [volume]);
 
-  // auto play next track
+  // auto play on track change or play state
   useEffect(() => {
-  if (bgmRef.current) {
-    if (isPlaying && bgmRef.current.src) {
-      bgmRef.current
-        .play()
-        .catch((err) => {
-          if (err.name !== "AbortError") console.error(err);
-        });
-    } else {
-      bgmRef.current.pause();
+    if (bgmRef.current && tracks && currentTrack !== null) {
+      bgmRef.current.src = tracks[currentTrack].url;
+      if (isPlaying) {
+        bgmRef.current
+          .play()
+          .catch((err) => {
+            if (err.name !== "AbortError") console.error(err);
+          });
+      }
     }
-  }
-}, [isPlaying, currentTrack, tracks]);
+  }, [currentTrack, isPlaying, tracks]);
 
-  return { currentTrack, setIsPlaying, setCurrentTrack, setPlayMode, isPlaying, playMode, volume, setVolume, bgmRef, handlePlay, handlePause, handleNext, handlePrev };
+  return {
+    currentTrack,
+    setIsPlaying,
+    setCurrentTrack,
+    setPlayMode,
+    isPlaying,
+    playMode,
+    volume,
+    setVolume,
+    bgmRef,
+    handlePlay,
+    handlePause,
+    handleNext,
+    handlePrev,
+  };
 };

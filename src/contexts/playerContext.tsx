@@ -57,8 +57,21 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   } = useTracks();
 
   const {
-    currentTrack, setIsPlaying, setCurrentTrack, setPlayMode, isPlaying, playMode, volume, setVolume, bgmRef, handlePlay, handlePause, handleNext, handlePrev
-  } = usePlayback(tracks);
+    currentTrack,
+    setIsPlaying,
+    setCurrentTrack,
+    setPlayMode,
+    isPlaying,
+    playMode,
+    volume,
+    setVolume,
+    bgmRef,
+    handlePlay,
+    handlePause,
+    handleNext,
+    handlePrev
+  } = usePlayback(tracks, ignoredTracks?.map(t => t.url) || []);
+
 
 
 
