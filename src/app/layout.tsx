@@ -5,13 +5,23 @@ import { LanguageProvider } from "@/contexts/languageContext";
 import { SfxProvider } from "@/contexts/sfxContext";
 
 export const metadata: Metadata = {
-  title: "rhythmloft | Online Lo-fi Music Player",
-  description: "Listen to relaxing lo-fi music.",
+  title: "RhythmLoft | Relaxing Music Player & AI Chat Companion",
+  description: "Listen to different types of music including lo-fi, synthwave, and more with original AI chat companions. Enjoy AI chat, daily encouragement, and productivity-enhancing features while focusing or studying.",
   keywords: [
-    "lofi beats",
-    "anime lofi",
+    "lofi beats online",
+    "lofi music",
+    "online lofi player",
+    "synthwave music",
+    "productivity app",
+    "pomodoro",
+    "AI chat",
+    "AI chat assistant",
+    "AI character companion",
+    "virtual character companion",
+    "virtual companion",
+    "ambient sounds",
     "study music",
-    "chill beats",
+    "focus music"
   ],
   authors: [{ name: "roifjcf" }],
   robots: {

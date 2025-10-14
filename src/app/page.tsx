@@ -71,85 +71,95 @@ export default function Home() {
   
   return (
     <>
-    <div className="page retro-screen">
-      <h1 className="hidden-text">rhythmloft Lo-fi Music Player</h1>
-
-        
-      <div className="content">
-
-        <div className="left">
-          
-          {(!isMobile || showChat) && <CharacterChat />}
-        </div>
-
-        <div className="right">
-          <Clock />
-          
-          <Pomodoro />
-          <PlayControl handleShowPlayList={handleShowPlayList} />
-        </div>
-
-      </div>
+      <header>
+        <h1 className="hidden-text">rhythmloft Lo-fi Music Player</h1>
+      </header>
 
 
-      <Navbar
-        isMobile={isMobile}
-        toggleChat={() => setShowChat((prev) => !prev)}
-      />
+      <main>
+        <div className="page retro-screen">
+
+            
+          <div className="content">
+
+            <div className="left">
+              {(!isMobile || showChat) && <CharacterChat />}
+            </div>
+
+            <div className="right">
+              <Clock />
+              
+              <Pomodoro />
+              <PlayControl handleShowPlayList={handleShowPlayList} />
+            </div>
+
+          </div>
 
 
-      {showPlayList &&
-        <div className="page-playlist">
-          <Playlist
-            playlistElement={playlistElement}
-            handleShowPlayList={handleShowPlayList}
+          <Navbar
+            isMobile={isMobile}
+            toggleChat={() => setShowChat((prev) => !prev)}
           />
-          <div className="blur-overlay"></div>
+
+
+          {showPlayList &&
+            <div className="page-playlist">
+              <Playlist
+                playlistElement={playlistElement}
+                handleShowPlayList={handleShowPlayList}
+              />
+              <div className="blur-overlay"></div>
+            </div>
+          }
+
+          <audio
+            ref={bgmRef}
+            src={
+              tracks && currentTrack !== null && tracks[currentTrack]
+                ? tracks[currentTrack].url
+                : undefined
+            }
+            preload="none"
+            onEnded={handleNext}
+          />
         </div>
-      }
 
-      <audio
-        ref={bgmRef}
-        src={
-          tracks && currentTrack !== null && tracks[currentTrack]
-            ? tracks[currentTrack].url
-            : undefined
-        }
-        preload="none"
-        onEnded={handleNext}
-      />
-    </div>
+        <div className="vaporwave-overlay"></div>
+      </main>
 
-    <div className="vaporwave-overlay"></div>
+      <footer>
+        <p className="hidden-text">© 2025 RhythmLoft</p>
+      </footer>
 
-    {/* <div className="particles-overlay">
-      {Array.from({ length: 50 }).map((_, i) => (
-        <div
-          key={i}
-          className="particle"
-          style={{
-            left: `${Math.random() * 100}vw`,
-            top: `${Math.random() * 100}vh`,
-            animationDuration: `${3 + Math.random() * 5}s`,
-            backgroundColor: `hsl(${Math.random() * 360}, 70%, 80%)`,
-          }}
-        />
-      ))}
-    </div> */}
-    {/* <div className="rain-overlay">
-      {Array.from({ length: 100 }).map((_, i) => (
-        <div
-          key={i}
-          className="rain-drop"
-          style={{
-            left: `${Math.random() * 100}vw`,
-            animationDuration: `${0.5 + Math.random() * 0.5}s`,
-            opacity: 0.2 + Math.random() * 0.3,
-            height: `${10 + Math.random() * 10}px`,
-          }}
-        />
-      ))}
-    </div> */}
+
+      {/* <div className="particles-overlay">
+        {Array.from({ length: 50 }).map((_, i) => (
+          <div
+            key={i}
+            className="particle"
+            style={{
+              left: `${Math.random() * 100}vw`,
+              top: `${Math.random() * 100}vh`,
+              animationDuration: `${3 + Math.random() * 5}s`,
+              backgroundColor: `hsl(${Math.random() * 360}, 70%, 80%)`,
+            }}
+          />
+        ))}
+      </div> */}
+      {/* <div className="rain-overlay">
+        {Array.from({ length: 100 }).map((_, i) => (
+          <div
+            key={i}
+            className="rain-drop"
+            style={{
+              left: `${Math.random() * 100}vw`,
+              animationDuration: `${0.5 + Math.random() * 0.5}s`,
+              opacity: 0.2 + Math.random() * 0.3,
+              height: `${10 + Math.random() * 10}px`,
+            }}
+          />
+        ))}
+      </div> */}
     </>
   );
 }
