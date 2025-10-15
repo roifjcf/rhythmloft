@@ -5,14 +5,17 @@ export const usePlayback = (
   tracks: trackInterface[] | null,
   ignoredTracks: string[] = [] // urls
 ) => {
-  const [currentTrack, setCurrentTrack] = useState<number | null>(0);
+  const [currentTrack, setCurrentTrack] = useState<number | null>(
+    tracks && tracks.length > 0 ? 0 : null
+  );
   const [isPlaying, setIsPlaying] = useState(false);
   const [playMode, setPlayMode] = useState<PlayMode>("shuffle");
   const [volume, setVolume] = useState(1);
   const bgmRef = useRef<HTMLAudioElement>(null);
 
   const getNextTrackIndex = (direction: 1 | -1 = 1) => {
-    if (!tracks) return null;
+    if (!tracks || tracks.length === 0) return null;
+
     const total = tracks.length;
     let next = currentTrack !== null ? currentTrack : 0;
 
@@ -23,7 +26,7 @@ export const usePlayback = (
         next = (next + direction + total) % total;
       }
 
-      if (!ignoredTracks.includes(tracks[next].url)) {
+      if (!ignoredTracks.includes(tracks[next]?.url || "")) {
         return next;
       }
     }
@@ -32,7 +35,7 @@ export const usePlayback = (
   };
 
   const handlePlay = () => {
-    if (bgmRef.current) bgmRef.current.play();
+    if (bgmRef.current) bgmRef.current.play().catch(() => {});
     setIsPlaying(true);
   };
 
@@ -61,13 +64,16 @@ export const usePlayback = (
   // auto play on track change or play state
   useEffect(() => {
     if (bgmRef.current && tracks && currentTrack !== null) {
-      bgmRef.current.src = tracks[currentTrack].url;
-      if (isPlaying) {
-        bgmRef.current
-          .play()
-          .catch((err) => {
-            if (err.name !== "AbortError") console.error(err);
-          });
+      const track = tracks[currentTrack];
+      if (track?.url) {
+        bgmRef.current.src = track.url;
+        if (isPlaying) {
+          bgmRef.current
+            .play()
+            .catch((err) => {
+              if (err.name !== "AbortError") console.error(err);
+            });
+        }
       }
     }
   }, [currentTrack, isPlaying, tracks]);
