@@ -7,6 +7,7 @@ import SearchBar from "@/components/searchBar/searchBar";
 import { isTrackIgnored } from "@/utils/trackHelpers";
 import TrackActionButtons from "@/components/trackActionButtons/trackActionButtons";
 import Icon from "@/components/icon/icon";
+import { PlaylistType } from "@/common/type";
 
 interface Props {
   playlistElement: React.RefObject<HTMLDivElement>;
@@ -24,7 +25,7 @@ export default function Playlist({ playlistElement, handleShowPlayList }: Props)
     handlePlayCustomTracks
   } = usePlayer();
 
-  const [selectedPlaylist, setSelectedPlaylist] = useState<"lofi" | "synthwave" | "custom">("lofi");
+  const [selectedPlaylist, setSelectedPlaylist] = useState<PlaylistType>("lofi");
   const [searchTerm, setSearchTerm] = useState("");
   if (!tracks) return <div className="playlist-container">Loading playlist...</div>;
 
