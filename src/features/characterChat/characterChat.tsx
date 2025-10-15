@@ -30,6 +30,18 @@ export default function CharacterChat() {
     ZH_TW: "Chinese (Traditional)",
   }[lang];
   
+  
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "characterChatMessages") {
+        setMessages([]);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
 
   useEffect(() => {
     const stored = localStorage.getItem("characterChatMessages");

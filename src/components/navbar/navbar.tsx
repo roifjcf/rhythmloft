@@ -53,7 +53,12 @@ export default function Navbar({ isMobile, toggleChat }: Props) {
           <button onClick={resetIgnoredTracks}>
             {translate("setting-menu.settings-items.reset-ignored-tracks")}
           </button>
-          <button onClick={()=>{localStorage.removeItem("characterChatMessages");}}>
+          <button
+            onClick={() => {
+              localStorage.removeItem("characterChatMessages");
+              window.dispatchEvent(new StorageEvent("storage", { key: "characterChatMessages" }));
+            }}
+          >
             {translate("setting-menu.settings-items.clear-chat-messages")}
           </button>
         </div>
