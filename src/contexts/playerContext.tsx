@@ -84,19 +84,19 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   const handlePlayLofi = () => {
     if (!tracksLofi) return;
     setTracks(tracksLofi);
-    setIsPlaying(true);
+    setCurrentTrack(0);
   }
 
   const handlePlaySynthwave = () => {
     if (!tracksSynthwave) return;
     setTracks(tracksSynthwave);
-    setIsPlaying(true);
+    setCurrentTrack(0);
   }
 
   const handlePlayCustomTracks = () => {
     if (!customTracks) return;
     setTracks(customTracks);
-    setIsPlaying(true);
+    setCurrentTrack(0);
   }
 
   const resetIgnoredTracks = () => {

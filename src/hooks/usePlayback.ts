@@ -13,6 +13,24 @@ export const usePlayback = (
   const [volume, setVolume] = useState(1);
   const bgmRef = useRef<HTMLAudioElement>(null);
 
+  useEffect(() => {
+    if (!bgmRef.current || !tracks || currentTrack === null) return;
+
+    const track = tracks[currentTrack];
+    if (!track?.url) return;
+
+    bgmRef.current.src = track.url;
+
+    const playPromise = bgmRef.current.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => setIsPlaying(true))
+        .catch(err => {
+          if (err.name !== "AbortError") console.error(err);
+        });
+    }
+  }, [tracks, currentTrack]);
+
   const getNextTrackIndex = (direction: 1 | -1 = 1) => {
     if (!tracks || tracks.length === 0) return null;
 
