@@ -42,12 +42,13 @@ function csvToTrackJson(inputFile, outputFile) {
   console.log(`Generated ${outputFile} with ${json.length} tracks.`);
 }
 
-// Tracks
-csvToTrackJson(
-  path.join(process.cwd(), "data", "tracks-lofi.csv"),
-  path.join(process.cwd(), "public/trackinfo", "tracks-lofi.json")
-);
-csvToTrackJson(
-  path.join(process.cwd(), "data", "tracks-synthwave.csv"),
-  path.join(process.cwd(), "public/trackinfo", "tracks-synthwave.json")
-);
+// List of base track filenames
+const tracks = ["lofi", "synthwave", "acoustic", "fantasy"];
+
+// Convert each CSV to JSON
+tracks.forEach((name) => {
+  csvToTrackJson(
+    path.join(process.cwd(), "data", `tracks-${name}.csv`),
+    path.join(process.cwd(), "public/trackinfo", `tracks-${name}.json`)
+  );
+});

@@ -22,6 +22,8 @@ export default function Playlist({ playlistElement, handleShowPlayList }: Props)
     handlePlaylistSongClick,
     handlePlayLofi,
     handlePlaySynthwave,
+    handlePlayAcoustic,
+    handlePlayFantasy,
     handlePlayCustomTracks
   } = usePlayer();
 
@@ -61,6 +63,18 @@ export default function Playlist({ playlistElement, handleShowPlayList }: Props)
             onClick={() => handleSelectPlaylist("synthwave", handlePlaySynthwave)}
           >
             Synthwave
+          </button>
+          <button
+            className={selectedPlaylist === "fantasy" ? "playlist-buttons--selected" : ""}
+            onClick={() => handleSelectPlaylist("fantasy", handlePlayFantasy)}
+          >
+            Fantasy
+          </button>
+          <button
+            className={selectedPlaylist === "acoustic" ? "playlist-buttons--selected" : ""}
+            onClick={() => handleSelectPlaylist("acoustic", handlePlayAcoustic)}
+          >
+            Acoustic
           </button>
           <button
             className={selectedPlaylist === "custom" ? "playlist-buttons--selected" : ""}

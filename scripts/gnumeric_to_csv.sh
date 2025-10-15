@@ -1,13 +1,25 @@
-
 #!/bin/bash
-# convert .gnumeric to .csv
+# Convert multiple .gnumeric files to .csv using ssconvert, with error handling
 
-INPUT="../data/tracks-lofi.gnumeric"
-OUTPUT="../data/tracks-lofi.csv"
+# Define base directory
+DATA_DIR="../data"
 
-ssconvert "$INPUT" "$OUTPUT"
+# List of base filenames (without extension)
+FILES=("tracks-lofi" "tracks-synthwave" "tracks-fantasy" "tracks-acoustic")
 
-INPUT="../data/tracks-synthwave.gnumeric"
-OUTPUT="../data/tracks-synthwave.csv"
+# Loop through the files and convert
+for FILE in "${FILES[@]}"; do
+    INPUT="$DATA_DIR/$FILE.gnumeric"
+    OUTPUT="$DATA_DIR/$FILE.csv"
 
-ssconvert "$INPUT" "$OUTPUT"
+    if [[ -f "$INPUT" ]]; then
+        echo "🔄 Converting $INPUT → $OUTPUT"
+        if ssconvert "$INPUT" "$OUTPUT"; then
+            echo "✅ Success: $OUTPUT created."
+        else
+            echo "❌ Error: Failed to convert $INPUT"
+        fi
+    else
+        echo "⚠️ Warning: File not found → $INPUT"
+    fi
+done
