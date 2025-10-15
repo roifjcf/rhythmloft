@@ -23,17 +23,23 @@ export default function Navbar({ isMobile, toggleChat }: Props) {
   const [preferredName, setPreferredName] = useState("");
 
   const [customPomodoro, setCustomPomodoro] = useState<{ work: number; break: number }>({
-    work: Number(localStorage.getItem("customPomodoroWork")) || 25,
-    break: Number(localStorage.getItem("customPomodoroBreak")) || 5,
+    work: 25,
+    break: 5,
   });
+
+  useEffect(() => {
+    const storedWork = localStorage.getItem("customPomodoroWork");
+    const storedBreak = localStorage.getItem("customPomodoroBreak");
+
+    if (storedWork) setCustomPomodoro(prev => ({ ...prev, work: Number(storedWork) }));
+    if (storedBreak) setCustomPomodoro(prev => ({ ...prev, break: Number(storedBreak) }));
+  }, []);
 
   // save changes
   useEffect(() => {
     localStorage.setItem("customPomodoroWork", String(customPomodoro.work));
     localStorage.setItem("customPomodoroBreak", String(customPomodoro.break));
-    window.dispatchEvent(
-      new CustomEvent("pomodoroChange", { detail: { ...customPomodoro } })
-    );
+    window.dispatchEvent(new CustomEvent("pomodoroChange", { detail: { ...customPomodoro } }));
   }, [customPomodoro]);
 
   const resetCustomPomodoro = () => {

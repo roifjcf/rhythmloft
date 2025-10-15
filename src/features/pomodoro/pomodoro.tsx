@@ -9,12 +9,8 @@ export default function Pomodoro() {
 
   const { translate } = useLanguage();
 
-  const [workMinutes, setWorkMinutes] = useState(
-    Number(localStorage.getItem("customPomodoroWork") ?? 25)
-  );
-  const [breakMinutes, setBreakMinutes] = useState(
-    Number(localStorage.getItem("customPomodoroBreak") ?? 5)
-  );
+  const [workMinutes, setWorkMinutes] = useState(25);
+  const [breakMinutes, setBreakMinutes] = useState(5);
 
   const { mode, timeLeft, isRunning, toggleStartPause, resetTimer, startSoundRef, endSoundRef } =
     usePomodoro({ workMinutes, breakMinutes });
@@ -24,6 +20,14 @@ export default function Pomodoro() {
     const s = (seconds % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
   };
+
+  useEffect(() => {
+    const storedWork = localStorage.getItem("customPomodoroWork");
+    const storedBreak = localStorage.getItem("customPomodoroBreak");
+
+    if (storedWork) setWorkMinutes(Number(storedWork));
+    if (storedBreak) setBreakMinutes(Number(storedBreak));
+  }, []);
 
   useEffect(() => {
     const handlePomodoroChange = (e: Event) => {
