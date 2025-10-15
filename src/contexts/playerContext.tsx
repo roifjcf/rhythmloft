@@ -1,12 +1,12 @@
 'use client';
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext, useMemo, useState, useEffect } from "react";
 import { PlayMode, trackInterface } from "@/common/type";
 import { useTracks } from "@/hooks/useTracks";
 import { usePlayback } from "@/hooks/usePlayback";
 import { useTrackList } from "@/hooks/useTrackList";
+import { TRACK_CATEGORIES } from "@/utils/constant";
 
 type PlayerContextType = {
-  // states
   tracks: trackInterface[] | null;
   customTracks: trackInterface[] | null;
   ignoredTracks: trackInterface[] | null;
@@ -14,9 +14,7 @@ type PlayerContextType = {
   isPlaying: boolean;
   playMode: PlayMode;
   volume: number;
-  // ref
   bgmRef: React.RefObject<HTMLAudioElement>;
-  // actions
   handlePlay: () => void;
   handlePause: () => void;
   handleNext: () => void;
@@ -24,20 +22,14 @@ type PlayerContextType = {
   handlePlaylistSongClick: (i: number) => void;
   setPlayMode: (mode: PlayMode) => void;
   setVolume: (v: number) => void;
-  handlePlayLofi: () => void;
-  handlePlaySynthwave: () => void;
-  handlePlayFantasy: () => void;
-  handlePlayAcoustic: () => void;
-  handlePlayCustomTracks: () => void;
+  handlePlayCategory: Record<string, () => void>;
   toggleCustomTrack: (track: trackInterface) => void;
   toggleIgnoredTrack: (track: trackInterface) => void;
   resetIgnoredTracks: () => void;
   resetCustomTracks: () => void;
 };
 
-
 const PlayerContext = createContext<PlayerContextType | null>(null);
-
 
 export function usePlayer() {
   const context = useContext(PlayerContext);
@@ -45,20 +37,21 @@ export function usePlayer() {
   return context;
 }
 
-
 export function PlayerProvider({ children }: { children: ReactNode }) {
-
   const { tracks: customTracks, toggleTrack: toggleCustomTrack, setTracks: setCustomTracks } = useTrackList("customTracks");
   const { tracks: ignoredTracks, toggleTrack: toggleIgnoredTrack, setTracks: setIgnoredTracks } = useTrackList("ignoredTracks");
 
-  const {
-    tracks,
-    setTracks,
-    tracksLofi,
-    tracksSynthwave,
-    tracksAcoustic,
-    tracksFantasy
-  } = useTracks();
+  const { tracksByCategory } = useTracks();
+
+  const [tracks, setTracks] = useState<trackInterface[] | null>(
+    tracksByCategory[TRACK_CATEGORIES[0]] ?? []
+  );
+
+  useEffect(() => {
+    if (!tracks || tracks.length === 0) {
+      setTracks(tracksByCategory[TRACK_CATEGORIES[0]] ?? []);
+    }
+  }, [tracksByCategory]);
 
   const {
     currentTrack,
@@ -74,46 +67,30 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     handlePause,
     handleNext,
     handlePrev
-  } = usePlayback(tracks, ignoredTracks?.map(t => t.url) || []);
-
-
-
+  } = usePlayback(tracks || [], ignoredTracks?.map(t => t.url) || []);
 
   const handlePlaylistSongClick = (i: number) => {
     setCurrentTrack(i);
     setIsPlaying(true);
   };
 
-
-  const handlePlayLofi = () => {
-    if (!tracksLofi) return;
-    setTracks(tracksLofi);
-    setCurrentTrack(0);
-  }
-
-  const handlePlaySynthwave = () => {
-    if (!tracksSynthwave) return;
-    setTracks(tracksSynthwave);
-    setCurrentTrack(0);
-  }
-
-  const handlePlayFantasy = () => {
-    if (!tracksFantasy) return;
-    setTracks(tracksFantasy);
-    setCurrentTrack(0);
-  }
-
-  const handlePlayAcoustic = () => {
-    if (!tracksAcoustic) return;
-    setTracks(tracksAcoustic);
-    setCurrentTrack(0);
-  }
-
-  const handlePlayCustomTracks = () => {
-    if (!customTracks) return;
-    setTracks(customTracks);
-    setCurrentTrack(0);
-  }
+  const handlePlayCategory: Record<string, () => void> = useMemo(() => {
+    const handlers: Record<string, () => void> = {};
+    TRACK_CATEGORIES.forEach(category => {
+      handlers[category] = () => {
+        const catTracks = tracksByCategory[category];
+        if (!catTracks) return;
+        setTracks(catTracks);
+        setCurrentTrack(0);
+      };
+    });
+    handlers["customTracks"] = () => {
+      if (!customTracks) return;
+      setTracks(customTracks);
+      setCurrentTrack(0);
+    };
+    return handlers;
+  }, [tracksByCategory, customTracks, setCurrentTrack]);
 
   const resetIgnoredTracks = () => {
     localStorage.removeItem("ignoredTracks");
@@ -143,11 +120,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
         setPlayMode,
         setVolume,
         bgmRef,
-        handlePlayLofi,
-        handlePlaySynthwave,
-        handlePlayFantasy,
-        handlePlayAcoustic,
-        handlePlayCustomTracks,
+        handlePlayCategory,
         toggleCustomTrack,
         toggleIgnoredTrack,
         resetIgnoredTracks,

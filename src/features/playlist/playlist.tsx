@@ -8,6 +8,7 @@ import { isTrackIgnored } from "@/utils/trackHelpers";
 import TrackActionButtons from "@/components/trackActionButtons/trackActionButtons";
 import Icon from "@/components/icon/icon";
 import { PlaylistType } from "@/common/type";
+import { TRACK_CATEGORIES } from "@/utils/constant";
 
 interface Props {
   playlistElement: React.RefObject<HTMLDivElement>;
@@ -15,25 +16,20 @@ interface Props {
 }
 
 export default function Playlist({ playlistElement, handleShowPlayList }: Props) {
-  const {
-    tracks,
-    ignoredTracks,
-    currentTrack,
-    handlePlaylistSongClick,
-    handlePlayLofi,
-    handlePlaySynthwave,
-    handlePlayAcoustic,
-    handlePlayFantasy,
-    handlePlayCustomTracks
-  } = usePlayer();
+  const { tracks, ignoredTracks, currentTrack, handlePlaylistSongClick, handlePlayCategory } = usePlayer();
 
-  const [selectedPlaylist, setSelectedPlaylist] = useState<PlaylistType>("lofi");
+  const [selectedPlaylist, setSelectedPlaylist] = useState<PlaylistType | "custom">(TRACK_CATEGORIES[0] as PlaylistType);
   const [searchTerm, setSearchTerm] = useState("");
+
   if (!tracks) return <div className="playlist-container">Loading playlist...</div>;
 
-  const handleSelectPlaylist = (type: typeof selectedPlaylist, action?: () => void) => {
+  const handleSelectPlaylist = (type: PlaylistType | "custom") => {
     setSelectedPlaylist(type);
-    if (action) action();
+    if (type === "custom") {
+      handlePlayCategory["customTracks"]?.();
+    } else {
+      handlePlayCategory[type]?.();
+    }
   };
 
   const filteredTracks = tracks.filter(track =>
@@ -52,33 +48,18 @@ export default function Playlist({ playlistElement, handleShowPlayList }: Props)
             onClick={handleShowPlayList}
             size="sm"
           />
-          <button
-            className={selectedPlaylist === "lofi" ? "playlist-buttons--selected" : ""}
-            onClick={() => handleSelectPlaylist("lofi", handlePlayLofi)}
-          >
-            Lofi
-          </button>
-          <button
-            className={selectedPlaylist === "synthwave" ? "playlist-buttons--selected" : ""}
-            onClick={() => handleSelectPlaylist("synthwave", handlePlaySynthwave)}
-          >
-            Synthwave
-          </button>
-          <button
-            className={selectedPlaylist === "fantasy" ? "playlist-buttons--selected" : ""}
-            onClick={() => handleSelectPlaylist("fantasy", handlePlayFantasy)}
-          >
-            Fantasy
-          </button>
-          <button
-            className={selectedPlaylist === "acoustic" ? "playlist-buttons--selected" : ""}
-            onClick={() => handleSelectPlaylist("acoustic", handlePlayAcoustic)}
-          >
-            Acoustic
-          </button>
+          {TRACK_CATEGORIES.map((category) => (
+            <button
+              key={category}
+              className={selectedPlaylist === category ? "playlist-buttons--selected" : ""}
+              onClick={() => handleSelectPlaylist(category as PlaylistType)}
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </button>
+          ))}
           <button
             className={selectedPlaylist === "custom" ? "playlist-buttons--selected" : ""}
-            onClick={() => handleSelectPlaylist("custom", handlePlayCustomTracks)}
+            onClick={() => handleSelectPlaylist("custom")}
           >
             Custom
           </button>
