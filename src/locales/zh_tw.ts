@@ -60,7 +60,9 @@ export const zh_tw = {
     "preferences": "偏好設定",
     "preferences-items": {
       "preferred-name": "暱稱",
-      "preferred-name-placeholder": "想讓別人怎麼稱呼你？"
+      "preferred-name-placeholder": "想讓別人怎麼稱呼你？",
+      "custom-pomodoro-time": "自訂番茄鐘時間",
+      "reset": "重置"
     }
   },
   "music-genre": {

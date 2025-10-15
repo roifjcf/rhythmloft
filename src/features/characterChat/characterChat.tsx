@@ -253,7 +253,7 @@ export default function CharacterChat() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={`Say something to ${currentRole.name}...`}
-          className="user-input"
+          className="user-input--full"
         />
         <button onClick={sendMessage} disabled={loading}>
           Send

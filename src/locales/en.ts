@@ -60,7 +60,9 @@ export const en = {
     "preferences": "Preferences",
     "preferences-items": {
       "preferred-name": "Preferred name",
-      "preferred-name-placeholder": "What do you want to be called?"
+      "preferred-name-placeholder": "What do you want to be called?",
+      "custom-pomodoro-time": "Custom pomodoro time",
+      "reset": "Reset"
     }
   },
   "music-genre": {

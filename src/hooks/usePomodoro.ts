@@ -40,6 +40,10 @@ export function usePomodoro({
   const startSoundRef = useRef<HTMLAudioElement | null>(null);
   const endSoundRef = useRef<HTMLAudioElement | null>(null);
 
+  useEffect(() => {
+    setTimeLeft(mode === "work" ? workMinutes * 60 : breakMinutes * 60);
+  }, [workMinutes, breakMinutes, mode]);
+  
   const toggleStartPause = () => {
     if (!isRunning && startSoundRef.current && timeLeft === workMinutes * 60) {
       startSoundRef.current.play();

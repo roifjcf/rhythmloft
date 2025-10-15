@@ -60,7 +60,9 @@ export const id = {
     "preferences": "Preferensi",
     "preferences-items": {
       "preferred-name": "Nama pilihan",
-      "preferred-name-placeholder": "Ingin dipanggil apa?"
+      "preferred-name-placeholder": "Ingin dipanggil apa?",
+      "custom-pomodoro-time": "Waktu pomodoro kustom",
+      "reset": "Reset"
     }
   },
   "music-genre": {

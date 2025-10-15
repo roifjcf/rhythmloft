@@ -15,10 +15,25 @@
   
   overflow: visible;
   z-index: 100;
+
+  .modal-content>section {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: $space-2;
+  }
 }
 
 .navbar-settings-buttons {
   display: flex;
   flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.navbar-pomodoro-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   gap: $space-2;
 }

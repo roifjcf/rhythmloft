@@ -60,7 +60,9 @@ export const jp = {
     "preferences": "環境設定",
     "preferences-items": {
       "preferred-name": "表示名",
-      "preferred-name-placeholder": "呼ばれたい名前は？"
+      "preferred-name-placeholder": "呼ばれたい名前は？",
+      "custom-pomodoro-time": "カスタムポモドーロ時間",
+      "reset": "リセット"
     }
   },
   "music-genre": {

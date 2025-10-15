@@ -3,28 +3,38 @@ import { useLanguage } from "@/contexts/languageContext";
 import Icon from "@/components/icon/icon";
 import { usePomodoro } from "@/hooks/usePomodoro";
 import "./pomodoro.scss";
+import { useEffect, useState } from "react";
 
-interface Props {
-  workMinutes?: number;
-  breakMinutes?: number;
-}
+export default function Pomodoro() {
 
-export default function Pomodoro({ workMinutes = 25, breakMinutes = 5 }: Props) {
   const { translate } = useLanguage();
 
+  const [workMinutes, setWorkMinutes] = useState(
+    Number(localStorage.getItem("customPomodoroWork") ?? 25)
+  );
+  const [breakMinutes, setBreakMinutes] = useState(
+    Number(localStorage.getItem("customPomodoroBreak") ?? 5)
+  );
+
   const { mode, timeLeft, isRunning, toggleStartPause, resetTimer, startSoundRef, endSoundRef } =
-    usePomodoro({
-      workMinutes,
-      breakMinutes,
-      startSoundUrl: "sfx/winner-bell-game-show-91932.mp3",
-      endSoundUrl: "sfx/bell-notification-337658.mp3",
-    });
+    usePomodoro({ workMinutes, breakMinutes });
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60).toString().padStart(2, "0");
     const s = (seconds % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
   };
+
+  useEffect(() => {
+    const handlePomodoroChange = (e: Event) => {
+      const { work, break: brk } = (e as CustomEvent).detail;
+      setWorkMinutes(work);
+      setBreakMinutes(brk);
+    };
+
+    window.addEventListener("pomodoroChange", handlePomodoroChange);
+    return () => window.removeEventListener("pomodoroChange", handlePomodoroChange);
+  }, []);
 
   return (
     <div className={`pomodoro-container container-bg ${mode}`}>

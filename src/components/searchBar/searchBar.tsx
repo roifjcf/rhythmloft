@@ -21,7 +21,7 @@ export default function SearchBar({ value, placeholder = "", onChange, className
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
-        className="user-input"
+        className="user-input user-input--full"
       />
     </div>
   );

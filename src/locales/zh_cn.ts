@@ -60,7 +60,9 @@ export const zh_cn = {
     "preferences": "偏好设置",
     "preferences-items": {
       "preferred-name": "昵称",
-      "preferred-name-placeholder": "你希望别人怎么称呼你？"
+      "preferred-name-placeholder": "你希望别人怎么称呼你？",
+      "custom-pomodoro-time": "自定义番茄钟时间",
+      "reset": "重置"
     }
   },
   "music-genre": {

@@ -39,7 +39,7 @@ export default function TextInputWithSound({
   return (
     <input
       id={id}
-      className={`user-input ${className}`}
+      className={`user-input user-input--full ${className}`}
       type="text"
       placeholder={placeholder}
       onKeyDown={handleKeyDown}
