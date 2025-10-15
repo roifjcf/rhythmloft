@@ -9,6 +9,8 @@
 import fs from "fs";
 import path from "path";
 import { parse } from "csv-parse/sync";
+import { TRACK_CATEGORIES } from "../src/utils/constant.js";
+
 
 function toRawUrl(url) {
   return url.replace("github.com", "raw.githubusercontent.com")
@@ -42,11 +44,8 @@ function csvToTrackJson(inputFile, outputFile) {
   console.log(`Generated ${outputFile} with ${json.length} tracks.`);
 }
 
-// List of base track filenames
-const tracks = ["lofi", "synthwave", "acoustic", "fantasy"];
-
 // Convert each CSV to JSON
-tracks.forEach((name) => {
+TRACK_CATEGORIES.forEach((name) => {
   csvToTrackJson(
     path.join(process.cwd(), "data", `tracks-${name}.csv`),
     path.join(process.cwd(), "public/trackinfo", `tracks-${name}.json`)
