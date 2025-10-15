@@ -19,6 +19,7 @@ export default function SfxUnit({ name, toggleSfx, volume, setVolume, isPlaying 
         alt={`${name}.png`}
         onClick={() => toggleSfx(name)}
         className={`icon-button${isPlaying ? " playing" : ""}`}
+        size="md"
       />
 
       <input

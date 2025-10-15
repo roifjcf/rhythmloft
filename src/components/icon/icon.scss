@@ -28,9 +28,4 @@
     cursor: pointer;
     opacity: 1;
   }
-
-  @media (max-width: $breakpoint-lg) {
-    width: $size-3xl;
-    height: $size-3xl;
-  }
 }

@@ -43,25 +43,20 @@ body {
   @include aberration-weak();
 }
 
-h2, h3 {
-  font-size: $font-size-lg;
-  font-weight: 400;
+h2, h3, p, li {
   @media (max-width: $breakpoint-lg) {
     font-size: $font-size-sm;
   }
+}
+
+h2, h3 {
+  font-size: $font-size-lg;
+  font-weight: 400;
+  
 }
 
 p {
   font-size: $font-size-base;
-  @media (max-width: $breakpoint-lg) {
-    font-size: $font-size-sm;
-  }
-}
-
-li {
-  @media (max-width: $breakpoint-lg) {
-    font-size: $font-size-sm;
-  }
 }
 
 a {
@@ -131,11 +126,6 @@ button {
   &:hover {
     cursor: pointer;
     opacity: 1;
-  }
-
-  @media (max-width: $breakpoint-lg) {
-    width: $size-3xl;
-    height: $size-3xl;
   }
 }
 
